@@ -1,0 +1,96 @@
+import 'dart:async';
+import 'dart:ui';
+
+import 'package:deeplink_rpc/deeplink_rpc.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+class _RunningRequest {
+  final completer = Completer<DeeplinkRpcResponse>();
+  final Timer? timer;
+
+  _RunningRequest({
+    required Duration timeout,
+    required VoidCallback onTimeout,
+  }) : timer = Timer(
+          timeout,
+          onTimeout,
+        );
+}
+
+class DeeplinkRpcClient {
+  late final _runningRequests = <String, _RunningRequest>{};
+
+  late final DeeplinkRpcResponseReceiver _deeplinkRpcReceiver;
+
+  DeeplinkRpcClient() {
+    _deeplinkRpcReceiver = DeeplinkRpcResponseReceiver();
+  }
+
+  void _registerResponseHandler(DeeplinkRpcRequest request) {
+    _deeplinkRpcReceiver.registerHandler(
+      DeeplinkRpcResponseHandler(
+        route: DeeplinkRpcRoute(Uri.parse(request.replyUrl).pathSegments.first),
+        handle: _completeRequest,
+      ),
+    );
+  }
+
+  void _completeRequest(DeeplinkRpcResponse response) {
+    final runningRequest = _runningRequests[response.id];
+
+    if (runningRequest == null) return;
+
+    runningRequest.completer.complete(response);
+
+    _runningRequests.remove(response.id);
+  }
+
+  bool handleRoute(String? path) {
+    if (!_deeplinkRpcReceiver.canHandle(path)) return false;
+
+    unawaited(_deeplinkRpcReceiver.handle(path));
+    return true;
+  }
+
+  Future<DeeplinkRpcResponse> send({
+    required DeeplinkRpcRequest request,
+    Duration timeout = const Duration(minutes: 2),
+  }) async {
+    if (_runningRequests.containsKey(request.id)) {
+      return DeeplinkRpcResponse.failure(
+        id: request.id,
+        failure: DeeplinkRpcFailure(
+          code: DeeplinkRpcFailure.kInvalidRequest,
+          message: 'A request with id ${request.id} already running.',
+        ),
+      );
+    }
+
+    _registerResponseHandler(request);
+
+    final runningRequest = _RunningRequest(
+      timeout: timeout,
+      onTimeout: () {
+        _completeRequest(
+          DeeplinkRpcResponse.failure(
+            id: request.id,
+            failure: DeeplinkRpcFailure(
+              code: DeeplinkRpcFailure.kTimeout,
+              message: 'Request timeout.',
+            ),
+          ),
+        );
+      },
+    );
+    _runningRequests[request.id] = runningRequest;
+
+    await launchUrl(
+      Uri.parse(
+        '${request.requestUrl}/${request.encode()}',
+      ),
+      mode: LaunchMode.externalApplication,
+    );
+
+    return runningRequest.completer.future;
+  }
+}
