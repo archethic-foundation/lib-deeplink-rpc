@@ -9,24 +9,23 @@ part 'request.g.dart';
 /// RPC request received through Deeplink.
 @freezed
 class DeeplinkRpcRequest with _$DeeplinkRpcRequest {
-  const factory DeeplinkRpcRequest._internal({
-    required String id,
-    required String requestUrl,
-    required String replyUrl,
-    required Map<String, dynamic> params,
-  }) = _DeeplinkRpcRequest;
-
   factory DeeplinkRpcRequest({
     required String requestUrl,
     required String replyUrl,
     Map<String, dynamic> params = const {},
   }) =>
       DeeplinkRpcRequest._internal(
-        id: Uuid().v4(),
+        id: const Uuid().v4(),
         requestUrl: requestUrl,
         replyUrl: replyUrl,
         params: params,
       );
+  const factory DeeplinkRpcRequest._internal({
+    required String id,
+    required String requestUrl,
+    required String replyUrl,
+    required Map<String, dynamic> params,
+  }) = _DeeplinkRpcRequest;
 
   factory DeeplinkRpcRequest.fromJson(Map<String, dynamic> json) =>
       _$DeeplinkRpcRequestFromJson(json);

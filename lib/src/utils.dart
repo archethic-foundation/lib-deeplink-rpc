@@ -1,8 +1,8 @@
 extension PowerString on String {
   String strip(String whatToStrip) {
-    int startIndex = 0, endIndex = length - 1;
+    var startIndex = 0, endIndex = length - 1;
 
-    for (int i = 0; i <= length; i++) {
+    for (var i = 0; i <= length; i++) {
       if (i == length) {
         return '';
       }
@@ -12,7 +12,7 @@ extension PowerString on String {
       }
     }
 
-    for (int i = length - 1; i >= 0; i--) {
+    for (var i = length - 1; i >= 0; i--) {
       if (!whatToStrip.contains(this[i])) {
         endIndex = i;
         break;

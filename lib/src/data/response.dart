@@ -16,6 +16,29 @@ class DeeplinkRpcResponse {
           failure == null || result == null,
           'A response cannot be both success and failure.',
         );
+  factory DeeplinkRpcResponse.decode(String data) =>
+      DeeplinkRpcResponse.fromJson(deeplinkRpc.decode(data));
+
+  factory DeeplinkRpcResponse.fromJson(Map<String, dynamic> json) =>
+      _$DeeplinkRpcResponseFromJson(json);
+
+  factory DeeplinkRpcResponse.success({
+    required String id,
+    dynamic result,
+  }) =>
+      DeeplinkRpcResponse(
+        id: id,
+        result: result,
+      );
+
+  factory DeeplinkRpcResponse.failure({
+    required String id,
+    required DeeplinkRpcFailure failure,
+  }) =>
+      DeeplinkRpcResponse(
+        id: id,
+        failure: failure,
+      );
 
   final String id;
   final DeeplinkRpcFailure? failure;
@@ -29,33 +52,9 @@ class DeeplinkRpcResponse {
     return success(result);
   }
 
-  factory DeeplinkRpcResponse.failure({
-    required String id,
-    required DeeplinkRpcFailure failure,
-  }) =>
-      DeeplinkRpcResponse(
-        id: id,
-        failure: failure,
-      );
-
-  factory DeeplinkRpcResponse.success({
-    required String id,
-    dynamic result,
-  }) =>
-      DeeplinkRpcResponse(
-        id: id,
-        result: result,
-      );
-
-  factory DeeplinkRpcResponse.fromJson(Map<String, dynamic> json) =>
-      _$DeeplinkRpcResponseFromJson(json);
-
   Map<String, dynamic> toJson() => _$DeeplinkRpcResponseToJson(this);
 
   String encode() => deeplinkRpc.encode(toJson());
-
-  factory DeeplinkRpcResponse.decode(String data) =>
-      DeeplinkRpcResponse.fromJson(deeplinkRpc.decode(data));
 }
 
 extension DeeplinkRpcResultExt on DeeplinkRpcResult {

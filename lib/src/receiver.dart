@@ -63,8 +63,8 @@ class DeeplinkRpcRequestReceiver
       final data = handler.route.getData(path);
 
       if (data == null) {
-        return DeeplinkRpcResult.failure(
-          failure: const DeeplinkRpcFailure(
+        return const DeeplinkRpcResult.failure(
+          failure: DeeplinkRpcFailure(
             code: DeeplinkRpcFailure.kInvalidRequest,
             message: 'Failed to extract data from path',
           ),
@@ -92,7 +92,7 @@ class DeeplinkRpcRequestReceiver
           );
         }
         return DeeplinkRpcResult.failure(
-          failure: DeeplinkRpcFailure(
+          failure: const DeeplinkRpcFailure(
             code: DeeplinkRpcFailure.kServerError,
           ),
           request: request,
@@ -105,7 +105,7 @@ class DeeplinkRpcRequestReceiver
         stackTrace: stack,
         name: _logName,
       );
-      return DeeplinkRpcResult.failure(
+      return const DeeplinkRpcResult.failure(
         failure: DeeplinkRpcFailure(
           code: DeeplinkRpcFailure.kServerError,
         ),
@@ -176,7 +176,7 @@ class DeeplinkRpcResponseReceiver
         stackTrace: stack,
         name: _logName,
       );
-      throw DeeplinkRpcResult.failure(
+      throw const DeeplinkRpcResult.failure(
         failure: DeeplinkRpcFailure(
           code: DeeplinkRpcFailure.kServerError,
         ),

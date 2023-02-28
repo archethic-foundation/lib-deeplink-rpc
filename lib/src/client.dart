@@ -5,9 +5,6 @@ import 'package:deeplink_rpc/deeplink_rpc.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class _RunningRequest {
-  final completer = Completer<DeeplinkRpcResponse>();
-  final Timer? timer;
-
   _RunningRequest({
     required Duration timeout,
     required VoidCallback onTimeout,
@@ -15,16 +12,17 @@ class _RunningRequest {
           timeout,
           onTimeout,
         );
+  final completer = Completer<DeeplinkRpcResponse>();
+  final Timer? timer;
 }
 
 class DeeplinkRpcClient {
-  late final _runningRequests = <String, _RunningRequest>{};
-
-  late final DeeplinkRpcResponseReceiver _deeplinkRpcReceiver;
-
   DeeplinkRpcClient() {
     _deeplinkRpcReceiver = DeeplinkRpcResponseReceiver();
   }
+  late final _runningRequests = <String, _RunningRequest>{};
+
+  late final DeeplinkRpcResponseReceiver _deeplinkRpcReceiver;
 
   void _registerResponseHandler(DeeplinkRpcRequest request) {
     _deeplinkRpcReceiver.registerHandler(
@@ -74,7 +72,7 @@ class DeeplinkRpcClient {
         _completeRequest(
           DeeplinkRpcResponse.failure(
             id: request.id,
-            failure: DeeplinkRpcFailure(
+            failure: const DeeplinkRpcFailure(
               code: DeeplinkRpcFailure.kTimeout,
               message: 'Request timeout.',
             ),

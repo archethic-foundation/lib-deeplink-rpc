@@ -1,5 +1,4 @@
 import 'package:deeplink_rpc/deeplink_rpc.dart';
-import 'package:deeplink_rpc/src/data/failure.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'result.freezed.dart';
