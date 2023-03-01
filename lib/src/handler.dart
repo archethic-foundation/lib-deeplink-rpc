@@ -1,3 +1,4 @@
+/// SPDX-License-Identifier: AGPL-3.0-or-later
 import 'dart:async';
 
 import 'package:deeplink_rpc/src/data/request.dart';

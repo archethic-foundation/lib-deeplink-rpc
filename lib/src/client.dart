@@ -1,3 +1,4 @@
+/// SPDX-License-Identifier: AGPL-3.0-or-later
 import 'dart:async';
 import 'dart:ui';
 
@@ -70,7 +71,7 @@ class DeeplinkRpcClient {
         id: request.id,
         failure: const DeeplinkRpcFailure(
           code: DeeplinkRpcFailure.kConnectivityIssue,
-          message: 'AEWallet Deeplink RPC not responding.',
+          message: 'Deeplink RPC not responding.',
         ),
       );
     }

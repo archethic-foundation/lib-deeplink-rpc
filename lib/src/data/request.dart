@@ -1,3 +1,4 @@
+/// SPDX-License-Identifier: AGPL-3.0-or-later
 import 'package:deeplink_rpc/src/codec.dart';
 import 'package:deeplink_rpc/src/data/failure.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

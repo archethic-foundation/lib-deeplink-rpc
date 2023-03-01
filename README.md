@@ -18,7 +18,7 @@ method_payload :     | Json Message |-> | gzip |-> | base64 |
                      +--------------+   +------+   +--------+
 
 
-Deeplink Url : `aewallet://archethic.net/<method_name>/<method_payload>`
+Deeplink Url : `<scheme>://<host>/<method_name>/<method_payload>`
 ```
 
 
@@ -30,7 +30,7 @@ method_payload :     | { "param1" : "a_value" } |----> | "H4sIAAAAAAAAA6tWUCpILE
                      +--------------------------+      +----------------------------------------------------------------+
 
 
-Deeplink Url : `aewallet://archethic.net/a_method/H4sIAAAAAAAAA6tWUCpILErMNVRSsFJQSowvS8wpTVVSqAUAhIgKchgAAAA=`
+Deeplink Url : `scheme://host/a_method/H4sIAAAAAAAAA6tWUCpILErMNVRSsFJQSowvS8wpTVVSqAUAhIgKchgAAAA=`
 
 ```
 ### Request formatting
@@ -39,16 +39,16 @@ Requests payload are encapsulated in a **[JSON-RPC 2.0](https://www.jsonrpc.org/
 
 ```typescript
 {
-  "id": Number,       // a unique client-generated integer identifying the request
-  "replyUrl": String, // Deeplink URL to which send the invokation result. This should be a Deeplink URL handled by the DApp.
+  "id": Number,                     // An unique client-generated integer identifying the request
+  "replyUrl": String,               // Deeplink URL to which send the invokation result. This should be a Deeplink URL handled by the DApp.
   "params": {
     "origin": {
-      "name": Number,             // human readable identifier of the DApp
-      "url": String | undefined,   // URL of the DApp
-      "logo": Base64 | undefined,  // logo of the DApp 
+      "name": String,               // Human readable identifier of the DApp
+      "url": String | undefined,    // URL of the DApp
+      "logo": Base64 | undefined,   // Logo of the DApp 
     },
-    "version": 2,         // Version of the DApp API
-    "payload": Object,  // Method parameters
+    "version": 2,                   // Version of the DApp API
+    "payload": Object,              // Method parameters
   }
 }
 ```
@@ -57,8 +57,8 @@ Requests payload are encapsulated in a **[JSON-RPC 2.0](https://www.jsonrpc.org/
 
 ```typescript
 {
-  "id": Number,       // the request identifier
-  "result":  Object,  // result payload
+  "id": Number,                     // The request identifier
+  "result":  Object,                // Result payload
 }
 ```
 
@@ -66,11 +66,11 @@ Requests payload are encapsulated in a **[JSON-RPC 2.0](https://www.jsonrpc.org/
 
 ```typescript
 {
-  "id": Number,       // the request identifier
+  "id": Number,                     // The request identifier
   "failure": {
-    "code": Number,   // Error code
-    "message": String | undefined, // Error description
-    "data": Object | undefined,    // Error data
+    "code": Number,                 // Error code
+    "message": String | undefined,  // Error description
+    "data": Object | undefined,     // Error data
   },
 }
 ```
@@ -85,12 +85,12 @@ Requests payload are encapsulated in a **[JSON-RPC 2.0](https://www.jsonrpc.org/
 /// 1. Enable deeplinking for your application (https://docs.flutter.dev/development/ui/navigation/deep-linking)
 
 /// 2. Declare the deeplink-rpc request receiver
-/// When an RPC call <scheme>://an_rpc_command/<payload> is received, the payload is decoded
+/// When a RPC call <scheme>://a_rpc_command/<payload> is received, the payload is decoded
 /// and transmitted to the `handle` method.
 final _deeplinkRpcReceiver = DeeplinkRpcRequestReceiver()
     ..registerHandler(
       DeeplinkRpcRequestHandler(
-        route: const DeeplinkRpcRoute('an_rpc_command'),
+        route: const DeeplinkRpcRoute('a_rpc_command'),
         handle: (request) {
             log('Command received');
         }
@@ -105,9 +105,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'DeeplinkRPC Demo',
-      home: const TransactionSendForm(),
+      home: const SendForm(),
       onGenerateRoute: (settings) {
-        if (_aewalletClient.handleRoute(settings.name)) return;
+        if (_client.handleRoute(settings.name)) return;
         return null;
       },
     );
@@ -121,12 +121,12 @@ class MyApp extends StatelessWidget {
 /// 1. Enable deeplinking for your application (https://docs.flutter.dev/development/ui/navigation/deep-linking)
 
 /// 2. Declare the deeplink-rpc receiver
-/// When an RPC call <scheme>://an_rpc_command/<payload> is received, the payload is decoded
+/// When a RPC call <scheme>://a_rpc_command/<payload> is received, the payload is decoded
 /// and transmitted to the `handle` method.
 final _deeplinkRpcReceiver = DeeplinkRpcRequestReceiver()
     ..registerHandler(
       DeeplinkRpcRequestHandler(
-        route: const DeeplinkRpcRoute('an_rpc_command'),
+        route: const DeeplinkRpcRoute('a_rpc_command'),
         handle: (request) {
             log('Command received');
         }
@@ -141,7 +141,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'DeeplinkRPC Demo',
-      home: const TransactionSendForm(),
+      home: const SendForm(),
       onGenerateRoute: (settings) {
         if (_deeplinkRpcReceiver.canHandle(settings.name)) {
             _deeplinkRpcReceiver.handle(settings.name);
@@ -161,7 +161,7 @@ class MyApp extends StatelessWidget {
 /// It is necessary to receive responses.
 
 /// 2. Declare the deeplink-rpc client
-/// When an RPC call <scheme>://an_rpc_command/<payload> is received, the payload is decoded
+/// When a RPC call <scheme>://a_rpc_command/<payload> is received, the payload is decoded
 /// and transmitted to the `handle` method.
 final _deeplinkRpcClient = DeeplinkRpcClient();
 

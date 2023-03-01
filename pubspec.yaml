@@ -1,24 +1,42 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
 name: deeplink_rpc
 description: A RPC-via-deeplink communication library.
-version: 1.0.0-dev.1
-repository: https://github.com/archethic-foundation/lib-deeplink-rpc.git
+version: 1.0.0
+homepage: https://github.com/archethic-foundation/lib-deeplink-rpc.git
 
 environment:
-  sdk: '>=2.18.5 <3.0.0'
+  sdk: '>=2.19.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
+
+  # Annotations for the freezed code-generator. This package does nothing without freezed too
   freezed_annotation: ^2.2.0
+
+  # Annotations for the JsonSerializable code-generator.
   json_annotation: ^4.7.0
-  url_launcher: ^6.1.9
+
+  # Flutter plugin for launching a URL. Supports web, phone, SMS, and email schemes.
+  url_launcher: ^6.1.10
+
+  # RFC4122 (v1, v4, v5) UUID Generator and Parser for all Dart platforms (Web, VM, Flutter)
   uuid: ^3.0.7
 
 dev_dependencies:
+
+  # A build system for Dart code generation and modular compilation
   build_runner: ^2.3.3
+
+  # Code generation for immutable classes that has a simple syntax/API without compromising on the features.
   freezed: ^2.3.2
+
+  # Automatically generate code for converting to and from JSON by annotating Dart classes.
   json_serializable: ^6.5.4
 
-  lints: ^2.0.0
-  test: ^1.16.0
+  # Official Dart lint rules. Defines the 'core' and 'recommended' set of lints suggested by the Dart team
+  lints: ^2.0.1
+
+  # A full featured library for writing and running Dart tests across platforms.
+  test: ^1.23.1
 

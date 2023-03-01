@@ -1,3 +1,4 @@
+/// SPDX-License-Identifier: AGPL-3.0-or-later
 extension PowerString on String {
   String strip(String whatToStrip) {
     var startIndex = 0, endIndex = length - 1;
