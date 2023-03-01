@@ -64,6 +64,17 @@ class DeeplinkRpcClient {
       );
     }
 
+    final url = Uri.parse('${request.requestUrl}/${request.encode()}');
+    if (!await canLaunchUrl(url)) {
+      return DeeplinkRpcResponse.failure(
+        id: request.id,
+        failure: const DeeplinkRpcFailure(
+          code: DeeplinkRpcFailure.kConnectivityIssue,
+          message: 'AEWallet Deeplink RPC not responding.',
+        ),
+      );
+    }
+
     _registerResponseHandler(request);
 
     final runningRequest = _RunningRequest(
@@ -83,9 +94,7 @@ class DeeplinkRpcClient {
     _runningRequests[request.id] = runningRequest;
 
     await launchUrl(
-      Uri.parse(
-        '${request.requestUrl}/${request.encode()}',
-      ),
+      url,
       mode: LaunchMode.externalApplication,
     );
 

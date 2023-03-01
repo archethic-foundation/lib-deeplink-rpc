@@ -18,5 +18,6 @@ class DeeplinkRpcFailure with _$DeeplinkRpcFailure implements Exception {
 
   static const kInvalidRequest = -32600;
   static const kServerError = -32000;
+  static const kConnectivityIssue = 4901;
   static const kTimeout = -33000;
 }
