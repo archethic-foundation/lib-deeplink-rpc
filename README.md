@@ -78,43 +78,6 @@ Requests payload are encapsulated in a **[JSON-RPC 2.0](https://www.jsonrpc.org/
 
 ## Usage
 
-
-### Server - listening to incoming requests
-
-```dart
-/// 1. Enable deeplinking for your application (https://docs.flutter.dev/development/ui/navigation/deep-linking)
-
-/// 2. Declare the deeplink-rpc request receiver
-/// When a RPC call <scheme>://a_rpc_command/<payload> is received, the payload is decoded
-/// and transmitted to the `handle` method.
-final _deeplinkRpcReceiver = DeeplinkRpcRequestReceiver()
-    ..registerHandler(
-      DeeplinkRpcRequestHandler(
-        route: const DeeplinkRpcRoute('a_rpc_command'),
-        handle: (request) {
-            log('Command received');
-        }
-      ),
-    );
-
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'DeeplinkRPC Demo',
-      home: const SendForm(),
-      onGenerateRoute: (settings) {
-        if (_client.handleRoute(settings.name)) return;
-        return null;
-      },
-    );
-  }
-}
-```
-
 ### Server - listening to incoming requests
 
 ```dart
@@ -183,8 +146,8 @@ class MyApp extends StatelessWidget {
             final response = await _deeplinkRpcClient.send(
               timeout: const Duration(seconds: 5),
               request: DeeplinkRpcRequest(
-                requestUrl: 'wallet://wallet.crypto/request_endpoint',
-                replyUrl: 'dapp://dapp.crypto/reply_endpoint',
+                requestUrl: 'serverapp://server.app/request_endpoint',
+                replyUrl: 'clientapp://client.app/reply_endpoint',
                 params: {
                   'param1': 'value1',
                   'param2': 'value2',
@@ -195,7 +158,7 @@ class MyApp extends StatelessWidget {
             response.map(
               failure: (failure) {
                 log(
-                  'Transaction failed',
+                  'RPC request failed',
                   error: failure,
                 );
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -205,7 +168,7 @@ class MyApp extends StatelessWidget {
               },
               success: (result) {
                 log(
-                  'Transaction succeed : ${json.encode(result)}',
+                  'RPC request succeed : ${json.encode(result)}',
                 );
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(json.encode(result))),
@@ -218,7 +181,7 @@ class MyApp extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.all(8.0),
             child: Center(
-              child: Text('DApp example'),
+              child: Text('Client example'),
             ),
           ),
         ),
