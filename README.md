@@ -106,10 +106,10 @@ class MyApp extends StatelessWidget {
       title: 'DeeplinkRPC Demo',
       home: const SendForm(),
       onGenerateRoute: (settings) {
-        if (_deeplinkRpcReceiver.canHandle(settings.name)) {
-            _deeplinkRpcReceiver.handle(settings.name);
-            return null;
-        }
+        /// 3. Listen to incoming deeplink requests
+        if (_deeplinkRpcReceiver.handleRoute(settings.name)) return;
+
+        // ... do other route generation stuffs here.
         return null;
       },
     );
@@ -136,7 +136,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'DeeplinkRPC Demo',
       onGenerateRoute: (settings) {
+        /// 3. Listen to incoming deeplink requests
         if (_deeplinkRpcClient.handleRoute(settings.name)) return;
+
+        // ... do other route generation stuffs here.
         return null;
       },
       home: Scaffold(
