@@ -1,6 +1,8 @@
 Changelog
 =========
 
+## 1.0.3
+- Fix compatibility with web platform
 ## 1.0.2
 - Add compatibility with web platform
 ## 1.0.1
