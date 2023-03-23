@@ -1,22 +1,24 @@
 /// SPDX-License-Identifier: AGPL-3.0-or-later
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:deeplink_rpc/deeplink_rpc.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 final _deeplinkRpcClient = DeeplinkRpcClient();
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final _messengerKey = GlobalKey<ScaffoldMessengerState>();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scaffoldMessengerKey: _messengerKey,
       title: 'DeeplinkRPC Demo',
       onGenerateRoute: (settings) {
         if (_deeplinkRpcClient.handleRoute(settings.name)) return;
@@ -44,7 +46,7 @@ class MyApp extends StatelessWidget {
                   'RPC request failed',
                   error: failure,
                 );
-                ScaffoldMessenger.of(context).showSnackBar(
+                _messengerKey.currentState?.showSnackBar(
                   SnackBar(
                     content: Text(failure.message ?? 'An error occured'),
                   ),
@@ -54,7 +56,7 @@ class MyApp extends StatelessWidget {
                 log(
                   'RPC request succeed : ${json.encode(result)}',
                 );
-                ScaffoldMessenger.of(context).showSnackBar(
+                _messengerKey.currentState?.showSnackBar(
                   SnackBar(content: Text(json.encode(result))),
                 );
               },
