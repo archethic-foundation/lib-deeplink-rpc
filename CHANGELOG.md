@@ -1,6 +1,8 @@
 Changelog
 =========
 
+## 1.0.4
+- Downgrade archive lib version
 ## 1.0.3
 - Fix compatibility with web platform
 ## 1.0.2
