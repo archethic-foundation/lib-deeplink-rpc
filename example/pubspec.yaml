@@ -13,8 +13,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # BE-YS dependencies -----------------------------------------------------------------------------
-  # Toolkit
   deeplink_rpc:
     path: ../
 
