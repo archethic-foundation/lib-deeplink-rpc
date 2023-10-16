@@ -6,16 +6,16 @@ part of 'failure.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_DeeplinkRpcFailure _$$_DeeplinkRpcFailureFromJson(
+_$DeeplinkRpcFailureImpl _$$DeeplinkRpcFailureImplFromJson(
         Map<String, dynamic> json) =>
-    _$_DeeplinkRpcFailure(
+    _$DeeplinkRpcFailureImpl(
       code: json['code'] as int,
       message: json['message'] as String?,
       data: json['data'],
     );
 
-Map<String, dynamic> _$$_DeeplinkRpcFailureToJson(
-        _$_DeeplinkRpcFailure instance) =>
+Map<String, dynamic> _$$DeeplinkRpcFailureImplToJson(
+        _$DeeplinkRpcFailureImpl instance) =>
     <String, dynamic>{
       'code': instance.code,
       'message': instance.message,

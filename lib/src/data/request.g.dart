@@ -6,17 +6,17 @@ part of 'request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_DeeplinkRpcRequest _$$_DeeplinkRpcRequestFromJson(
+_$DeeplinkRpcRequestImpl _$$DeeplinkRpcRequestImplFromJson(
         Map<String, dynamic> json) =>
-    _$_DeeplinkRpcRequest(
+    _$DeeplinkRpcRequestImpl(
       id: json['id'] as String,
       requestUrl: json['requestUrl'] as String,
       replyUrl: json['replyUrl'] as String,
       params: json['params'] as Map<String, dynamic>,
     );
 
-Map<String, dynamic> _$$_DeeplinkRpcRequestToJson(
-        _$_DeeplinkRpcRequest instance) =>
+Map<String, dynamic> _$$DeeplinkRpcRequestImplToJson(
+        _$DeeplinkRpcRequestImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'requestUrl': instance.requestUrl,

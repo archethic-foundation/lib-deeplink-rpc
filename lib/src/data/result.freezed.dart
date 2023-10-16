@@ -114,12 +114,12 @@ class _$DeeplinkRpcResultCopyWithImpl<$Res, $Val extends DeeplinkRpcResult>
 }
 
 /// @nodoc
-abstract class _$$_DeeplinkRpcResultFailureCopyWith<$Res>
+abstract class _$$DeeplinkRpcResultFailureImplCopyWith<$Res>
     implements $DeeplinkRpcResultCopyWith<$Res> {
-  factory _$$_DeeplinkRpcResultFailureCopyWith(
-          _$_DeeplinkRpcResultFailure value,
-          $Res Function(_$_DeeplinkRpcResultFailure) then) =
-      __$$_DeeplinkRpcResultFailureCopyWithImpl<$Res>;
+  factory _$$DeeplinkRpcResultFailureImplCopyWith(
+          _$DeeplinkRpcResultFailureImpl value,
+          $Res Function(_$DeeplinkRpcResultFailureImpl) then) =
+      __$$DeeplinkRpcResultFailureImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({DeeplinkRpcRequest? request, DeeplinkRpcFailure failure});
@@ -130,11 +130,13 @@ abstract class _$$_DeeplinkRpcResultFailureCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DeeplinkRpcResultFailureCopyWithImpl<$Res>
-    extends _$DeeplinkRpcResultCopyWithImpl<$Res, _$_DeeplinkRpcResultFailure>
-    implements _$$_DeeplinkRpcResultFailureCopyWith<$Res> {
-  __$$_DeeplinkRpcResultFailureCopyWithImpl(_$_DeeplinkRpcResultFailure _value,
-      $Res Function(_$_DeeplinkRpcResultFailure) _then)
+class __$$DeeplinkRpcResultFailureImplCopyWithImpl<$Res>
+    extends _$DeeplinkRpcResultCopyWithImpl<$Res,
+        _$DeeplinkRpcResultFailureImpl>
+    implements _$$DeeplinkRpcResultFailureImplCopyWith<$Res> {
+  __$$DeeplinkRpcResultFailureImplCopyWithImpl(
+      _$DeeplinkRpcResultFailureImpl _value,
+      $Res Function(_$DeeplinkRpcResultFailureImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -143,7 +145,7 @@ class __$$_DeeplinkRpcResultFailureCopyWithImpl<$Res>
     Object? request = freezed,
     Object? failure = null,
   }) {
-    return _then(_$_DeeplinkRpcResultFailure(
+    return _then(_$DeeplinkRpcResultFailureImpl(
       request: freezed == request
           ? _value.request
           : request // ignore: cast_nullable_to_non_nullable
@@ -166,8 +168,8 @@ class __$$_DeeplinkRpcResultFailureCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DeeplinkRpcResultFailure extends _DeeplinkRpcResultFailure {
-  const _$_DeeplinkRpcResultFailure({this.request, required this.failure})
+class _$DeeplinkRpcResultFailureImpl extends _DeeplinkRpcResultFailure {
+  const _$DeeplinkRpcResultFailureImpl({this.request, required this.failure})
       : super._();
 
   @override
@@ -184,7 +186,7 @@ class _$_DeeplinkRpcResultFailure extends _DeeplinkRpcResultFailure {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DeeplinkRpcResultFailure &&
+            other is _$DeeplinkRpcResultFailureImpl &&
             (identical(other.request, request) || other.request == request) &&
             (identical(other.failure, failure) || other.failure == failure));
   }
@@ -195,9 +197,9 @@ class _$_DeeplinkRpcResultFailure extends _DeeplinkRpcResultFailure {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DeeplinkRpcResultFailureCopyWith<_$_DeeplinkRpcResultFailure>
-      get copyWith => __$$_DeeplinkRpcResultFailureCopyWithImpl<
-          _$_DeeplinkRpcResultFailure>(this, _$identity);
+  _$$DeeplinkRpcResultFailureImplCopyWith<_$DeeplinkRpcResultFailureImpl>
+      get copyWith => __$$DeeplinkRpcResultFailureImplCopyWithImpl<
+          _$DeeplinkRpcResultFailureImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -269,8 +271,9 @@ class _$_DeeplinkRpcResultFailure extends _DeeplinkRpcResultFailure {
 
 abstract class _DeeplinkRpcResultFailure extends DeeplinkRpcResult {
   const factory _DeeplinkRpcResultFailure(
-      {final DeeplinkRpcRequest? request,
-      required final DeeplinkRpcFailure failure}) = _$_DeeplinkRpcResultFailure;
+          {final DeeplinkRpcRequest? request,
+          required final DeeplinkRpcFailure failure}) =
+      _$DeeplinkRpcResultFailureImpl;
   const _DeeplinkRpcResultFailure._() : super._();
 
   @override
@@ -278,17 +281,17 @@ abstract class _DeeplinkRpcResultFailure extends DeeplinkRpcResult {
   DeeplinkRpcFailure get failure;
   @override
   @JsonKey(ignore: true)
-  _$$_DeeplinkRpcResultFailureCopyWith<_$_DeeplinkRpcResultFailure>
+  _$$DeeplinkRpcResultFailureImplCopyWith<_$DeeplinkRpcResultFailureImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_DeeplinkRpcResultSuccessCopyWith<$Res>
+abstract class _$$DeeplinkRpcResultSuccessImplCopyWith<$Res>
     implements $DeeplinkRpcResultCopyWith<$Res> {
-  factory _$$_DeeplinkRpcResultSuccessCopyWith(
-          _$_DeeplinkRpcResultSuccess value,
-          $Res Function(_$_DeeplinkRpcResultSuccess) then) =
-      __$$_DeeplinkRpcResultSuccessCopyWithImpl<$Res>;
+  factory _$$DeeplinkRpcResultSuccessImplCopyWith(
+          _$DeeplinkRpcResultSuccessImpl value,
+          $Res Function(_$DeeplinkRpcResultSuccessImpl) then) =
+      __$$DeeplinkRpcResultSuccessImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({DeeplinkRpcRequest request, dynamic result});
@@ -298,11 +301,13 @@ abstract class _$$_DeeplinkRpcResultSuccessCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_DeeplinkRpcResultSuccessCopyWithImpl<$Res>
-    extends _$DeeplinkRpcResultCopyWithImpl<$Res, _$_DeeplinkRpcResultSuccess>
-    implements _$$_DeeplinkRpcResultSuccessCopyWith<$Res> {
-  __$$_DeeplinkRpcResultSuccessCopyWithImpl(_$_DeeplinkRpcResultSuccess _value,
-      $Res Function(_$_DeeplinkRpcResultSuccess) _then)
+class __$$DeeplinkRpcResultSuccessImplCopyWithImpl<$Res>
+    extends _$DeeplinkRpcResultCopyWithImpl<$Res,
+        _$DeeplinkRpcResultSuccessImpl>
+    implements _$$DeeplinkRpcResultSuccessImplCopyWith<$Res> {
+  __$$DeeplinkRpcResultSuccessImplCopyWithImpl(
+      _$DeeplinkRpcResultSuccessImpl _value,
+      $Res Function(_$DeeplinkRpcResultSuccessImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -311,7 +316,7 @@ class __$$_DeeplinkRpcResultSuccessCopyWithImpl<$Res>
     Object? request = null,
     Object? result = freezed,
   }) {
-    return _then(_$_DeeplinkRpcResultSuccess(
+    return _then(_$DeeplinkRpcResultSuccessImpl(
       request: null == request
           ? _value.request
           : request // ignore: cast_nullable_to_non_nullable
@@ -334,8 +339,8 @@ class __$$_DeeplinkRpcResultSuccessCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DeeplinkRpcResultSuccess extends _DeeplinkRpcResultSuccess {
-  const _$_DeeplinkRpcResultSuccess({required this.request, this.result})
+class _$DeeplinkRpcResultSuccessImpl extends _DeeplinkRpcResultSuccess {
+  const _$DeeplinkRpcResultSuccessImpl({required this.request, this.result})
       : super._();
 
   @override
@@ -352,7 +357,7 @@ class _$_DeeplinkRpcResultSuccess extends _DeeplinkRpcResultSuccess {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DeeplinkRpcResultSuccess &&
+            other is _$DeeplinkRpcResultSuccessImpl &&
             (identical(other.request, request) || other.request == request) &&
             const DeepCollectionEquality().equals(other.result, result));
   }
@@ -364,9 +369,9 @@ class _$_DeeplinkRpcResultSuccess extends _DeeplinkRpcResultSuccess {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DeeplinkRpcResultSuccessCopyWith<_$_DeeplinkRpcResultSuccess>
-      get copyWith => __$$_DeeplinkRpcResultSuccessCopyWithImpl<
-          _$_DeeplinkRpcResultSuccess>(this, _$identity);
+  _$$DeeplinkRpcResultSuccessImplCopyWith<_$DeeplinkRpcResultSuccessImpl>
+      get copyWith => __$$DeeplinkRpcResultSuccessImplCopyWithImpl<
+          _$DeeplinkRpcResultSuccessImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -439,7 +444,7 @@ class _$_DeeplinkRpcResultSuccess extends _DeeplinkRpcResultSuccess {
 abstract class _DeeplinkRpcResultSuccess extends DeeplinkRpcResult {
   const factory _DeeplinkRpcResultSuccess(
       {required final DeeplinkRpcRequest request,
-      final dynamic result}) = _$_DeeplinkRpcResultSuccess;
+      final dynamic result}) = _$DeeplinkRpcResultSuccessImpl;
   const _DeeplinkRpcResultSuccess._() : super._();
 
   @override
@@ -447,6 +452,6 @@ abstract class _DeeplinkRpcResultSuccess extends DeeplinkRpcResult {
   dynamic get result;
   @override
   @JsonKey(ignore: true)
-  _$$_DeeplinkRpcResultSuccessCopyWith<_$_DeeplinkRpcResultSuccess>
+  _$$DeeplinkRpcResultSuccessImplCopyWith<_$DeeplinkRpcResultSuccessImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

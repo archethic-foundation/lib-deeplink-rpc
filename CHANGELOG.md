@@ -1,5 +1,7 @@
 Changelog
 =========
+## 1.0.6
+- Update dependencies and Dart version
 ## 1.0.5
 - Encapsulate the example in a dedicated project (contribution @gdaguin)
 ## 1.0.4
