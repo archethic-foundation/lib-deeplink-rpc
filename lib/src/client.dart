@@ -66,15 +66,6 @@ class DeeplinkRpcClient {
     }
 
     final url = Uri.parse('${request.requestUrl}/${request.encode()}');
-    if (!await canLaunchUrl(url)) {
-      return DeeplinkRpcResponse.failure(
-        id: request.id,
-        failure: const DeeplinkRpcFailure(
-          code: DeeplinkRpcFailure.kConnectivityIssue,
-          message: 'Deeplink RPC not responding.',
-        ),
-      );
-    }
 
     _registerResponseHandler(request);
 
