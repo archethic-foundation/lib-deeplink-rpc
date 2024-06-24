@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.0.8
+- Fix web deeplink RPC
+
 ## 1.0.7
 - Migration to flutter 3.22
 
