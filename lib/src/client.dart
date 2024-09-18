@@ -8,14 +8,18 @@ import 'package:url_launcher/url_launcher.dart';
 
 class _RunningRequest {
   _RunningRequest({
-    required Duration timeout,
+    Duration? timeout,
     required VoidCallback onTimeout,
-  }) : timer = Timer(
-          timeout,
-          onTimeout,
-        );
+  }) {
+    if (timeout != null) {
+      timer = Timer(
+        timeout,
+        onTimeout,
+      );
+    }
+  }
   final completer = Completer<DeeplinkRpcResponse>();
-  final Timer? timer;
+  late final Timer? timer;
 }
 
 class DeeplinkRpcClient {
@@ -58,7 +62,7 @@ class DeeplinkRpcClient {
 
   Future<DeeplinkRpcResponse> send({
     required DeeplinkRpcRequest request,
-    Duration timeout = const Duration(minutes: 2),
+    Duration? timeout,
   }) async {
     if (_runningRequests.containsKey(request.id)) {
       return DeeplinkRpcResponse.failure(
