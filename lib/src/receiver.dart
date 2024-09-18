@@ -1,15 +1,16 @@
 /// SPDX-License-Identifier: AGPL-3.0-or-later
-import 'dart:developer';
-
 import 'package:deeplink_rpc/src/data/failure.dart';
 import 'package:deeplink_rpc/src/data/request.dart';
 import 'package:deeplink_rpc/src/data/response.dart';
 import 'package:deeplink_rpc/src/data/result.dart';
 import 'package:deeplink_rpc/src/handler.dart';
+import 'package:logging/logging.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 abstract class BaseDeeplinkRpcReceiver<T extends DeeplinkRpcHandler> {
   final Set<T> _routeHandlers = {};
+
+  static final _logger = Logger('DeeplinkRPC');
 
   T? _handlerForPath(String? path) {
     if (path == null) return null;
@@ -21,9 +22,8 @@ abstract class BaseDeeplinkRpcReceiver<T extends DeeplinkRpcHandler> {
 
   void registerHandler(T handler) {
     if (_routeHandlers.contains(handler)) {
-      log(
+      _logger.info(
         'A route handler is already registered for ${handler.route.pathFirstSegment}',
-        name: 'DeeplinkRPC',
       );
       return;
     }
@@ -42,13 +42,12 @@ class DeeplinkRpcRequestReceiver
     extends BaseDeeplinkRpcReceiver<DeeplinkRpcRequestHandler> {
   DeeplinkRpcRequestReceiver();
 
-  static const _logName = 'DeeplinkRpcRequest';
+  static final _logger = Logger('DeeplinkRpcRequest');
 
   Future<DeeplinkRpcResult> _handle(String? path) async {
     try {
-      log(
+      _logger.info(
         'Handles RPC call',
-        name: _logName,
       );
 
       final handler = _handlerForPath(path);
@@ -77,9 +76,8 @@ class DeeplinkRpcRequestReceiver
       try {
         final result = await handler.handle(request);
 
-        log(
+        _logger.info(
           'RPC call handled',
-          name: _logName,
         );
         return DeeplinkRpcResult.success(
           request: request,
@@ -100,11 +98,10 @@ class DeeplinkRpcRequestReceiver
         );
       }
     } catch (e, stack) {
-      log(
+      _logger.severe(
         'An error occured',
-        error: e,
-        stackTrace: stack,
-        name: _logName,
+        e,
+        stack,
       );
       return const DeeplinkRpcResult.failure(
         failure: DeeplinkRpcFailure(
@@ -120,9 +117,8 @@ class DeeplinkRpcRequestReceiver
     final request = result.request;
     final response = result.toResponse();
     if (request == null || response == null) {
-      log(
+      _logger.info(
         'Impossible to send RPC result back',
-        name: _logName,
       );
       return;
     }
@@ -136,13 +132,12 @@ class DeeplinkRpcResponseReceiver
     extends BaseDeeplinkRpcReceiver<DeeplinkRpcResponseHandler> {
   DeeplinkRpcResponseReceiver();
 
-  static const _logName = 'DeeplinkRpcResponse';
+  static final _logger = Logger('DeeplinkRpcResponse');
 
   Future<void> handle(String? path) async {
     try {
-      log(
+      _logger.info(
         'Handles RPC response',
-        name: _logName,
       );
 
       final handler = _handlerForPath(path);
@@ -166,16 +161,14 @@ class DeeplinkRpcResponseReceiver
 
       await handler.handle(response);
 
-      log(
+      _logger.info(
         'RPC call handled',
-        name: _logName,
       );
     } catch (e, stack) {
-      log(
+      _logger.info(
         'An error occured',
-        error: e,
-        stackTrace: stack,
-        name: _logName,
+        e,
+        stack,
       );
       throw const DeeplinkRpcResult.failure(
         failure: DeeplinkRpcFailure(

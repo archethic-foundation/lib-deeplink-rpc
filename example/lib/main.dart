@@ -1,8 +1,9 @@
 /// SPDX-License-Identifier: AGPL-3.0-or-later
 import 'dart:convert';
-import 'dart:developer';
+
 import 'package:deeplink_rpc/deeplink_rpc.dart';
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   final _messengerKey = GlobalKey<ScaffoldMessengerState>();
+  final _logger = Logger('Example app');
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +44,9 @@ class MyApp extends StatelessWidget {
 
             response.map(
               failure: (failure) {
-                log(
+                _logger.severe(
                   'RPC request failed',
-                  error: failure,
+                  failure,
                 );
                 _messengerKey.currentState?.showSnackBar(
                   SnackBar(
@@ -53,7 +55,7 @@ class MyApp extends StatelessWidget {
                 );
               },
               success: (result) {
-                log(
+                _logger.info(
                   'RPC request succeed : ${json.encode(result)}',
                 );
                 _messengerKey.currentState?.showSnackBar(

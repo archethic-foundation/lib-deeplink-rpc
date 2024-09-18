@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:ui';
 
 import 'package:deeplink_rpc/deeplink_rpc.dart';
+import 'package:logging/logging.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class _RunningRequest {
@@ -21,6 +22,8 @@ class DeeplinkRpcClient {
   DeeplinkRpcClient() {
     _deeplinkRpcReceiver = DeeplinkRpcResponseReceiver();
   }
+
+  final _logger = Logger('DeeplinkRPCClient');
   late final _runningRequests = <String, _RunningRequest>{};
 
   late final DeeplinkRpcResponseReceiver _deeplinkRpcReceiver;
@@ -35,6 +38,8 @@ class DeeplinkRpcClient {
   }
 
   void _completeRequest(DeeplinkRpcResponse response) {
+    _logger.fine('Request completed $response');
+
     final runningRequest = _runningRequests[response.id];
 
     if (runningRequest == null) return;
@@ -66,6 +71,8 @@ class DeeplinkRpcClient {
     }
 
     final url = Uri.parse('${request.requestUrl}/${request.encode()}');
+
+    _logger.fine('Attempt to send request $url');
 
     _registerResponseHandler(request);
 
