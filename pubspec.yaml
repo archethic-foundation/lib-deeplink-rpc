@@ -17,6 +17,8 @@ dependencies:
   # Annotations for the JsonSerializable code-generator.
   json_annotation: ^4.9.0
 
+  logging: ^1.2.0
+
   # Flutter plugin for launching a URL. Supports web, phone, SMS, and email schemes.
   url_launcher: ^6.3.0
 
