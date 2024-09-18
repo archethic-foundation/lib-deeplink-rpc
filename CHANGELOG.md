@@ -1,6 +1,14 @@
 Changelog
 =========
 
+## 1.1.0
+
+-refactor: :recycle: Use Logging library
+
+### Breaking changes
+- feat: :sparkles: Request Timeout is optional. There is no default value anymore.
+
+
 ## 1.0.8
 - Fix web deeplink RPC
 

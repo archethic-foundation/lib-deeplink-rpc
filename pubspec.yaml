@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 name: deeplink_rpc
 description: A RPC-via-deeplink communication library coded in Dart. This is dedicated to Flutter mobile applications (iOS / Android).
-version: 1.0.8
+version: 1.1.0
 homepage: https://github.com/archethic-foundation/lib-deeplink-rpc.git
 
 environment:
