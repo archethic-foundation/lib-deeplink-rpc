@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       scaffoldMessengerKey: _messengerKey,
       title: 'DeeplinkRPC Demo',
       onGenerateRoute: (settings) {
-        if (_deeplinkRpcClient.handleRoute(settings.name)) return;
+        if (_deeplinkRpcClient.handleResponse(settings.name)) return;
         return null;
       },
       home: Scaffold(
