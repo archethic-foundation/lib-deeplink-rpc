@@ -1,4 +1,4 @@
-import 'package:url_launcher/url_launcher.dart' as urlLauncher;
+import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
 class UrlLauncher {
   const UrlLauncher();
@@ -7,12 +7,12 @@ class UrlLauncher {
   Future<bool> launchUrl(
     Uri url,
   ) =>
-      urlLauncher.launchUrl(
+      url_launcher.launchUrl(
         url,
-        mode: urlLauncher.LaunchMode.externalApplication,
+        mode: url_launcher.LaunchMode.externalApplication,
       );
 
   /// Checks whether the specified URL can be handled by some app installed on the
   /// device.
-  Future<bool> canLaunchUrl(Uri url) => urlLauncher.canLaunchUrl(url);
+  Future<bool> canLaunchUrl(Uri url) => url_launcher.canLaunchUrl(url);
 }
