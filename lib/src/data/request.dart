@@ -1,6 +1,4 @@
 /// SPDX-License-Identifier: AGPL-3.0-or-later
-import 'package:deeplink_rpc/src/codec.dart';
-import 'package:deeplink_rpc/src/data/failure.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
 
@@ -16,11 +14,12 @@ class DeeplinkRpcRequest with _$DeeplinkRpcRequest {
     Map<String, dynamic> params = const {},
   }) =>
       DeeplinkRpcRequest._internal(
-        id: const Uuid().v4(),
+        id: const Uuid().v4(), // TODOrename to `nonce`
         requestUrl: requestUrl,
         replyUrl: replyUrl,
         params: params,
       );
+
   const factory DeeplinkRpcRequest._internal({
     required String id,
     required String requestUrl,
@@ -32,16 +31,4 @@ class DeeplinkRpcRequest with _$DeeplinkRpcRequest {
       _$DeeplinkRpcRequestFromJson(json);
 
   const DeeplinkRpcRequest._();
-
-  factory DeeplinkRpcRequest.decode(Object? argument) {
-    if (argument is! String) {
-      throw const DeeplinkRpcFailure(code: DeeplinkRpcFailure.kInvalidRequest);
-    }
-
-    return DeeplinkRpcRequest.fromJson(
-      deeplinkRpc.decode(argument),
-    );
-  }
-
-  String encode() => deeplinkRpc.encode(toJson());
 }

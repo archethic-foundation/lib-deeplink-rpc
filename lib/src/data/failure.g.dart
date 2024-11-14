@@ -9,7 +9,7 @@ part of 'failure.dart';
 _$DeeplinkRpcFailureImpl _$$DeeplinkRpcFailureImplFromJson(
         Map<String, dynamic> json) =>
     _$DeeplinkRpcFailureImpl(
-      code: json['code'] as int,
+      code: (json['code'] as num).toInt(),
       message: json['message'] as String?,
       data: json['data'],
     );

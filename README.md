@@ -13,9 +13,9 @@ To get it working, the **message** is encoded that way :
 
 
 ```
-                     +--------------+   +------+   +--------+
-method_payload :     | Json Message |-> | gzip |-> | base64 |
-                     +--------------+   +------+   +--------+
+                     +--------------+   +------+   +-----------+
+method_payload :     | Json Message |-> | gzip |-> | base64Url |
+                     +--------------+   +------+   +-----------+
 
 
 Deeplink Url : `<scheme>://<host>/<method_name>/<method_payload>`
@@ -86,7 +86,7 @@ Requests payload are encapsulated in a **[JSON-RPC 2.0](https://www.jsonrpc.org/
 /// 2. Declare the deeplink-rpc receiver
 /// When a RPC call <scheme>://a_rpc_command/<payload> is received, the payload is decoded
 /// and transmitted to the `handle` method.
-final _deeplinkRpcReceiver = DeeplinkRpcRequestReceiver()
+final _deeplinkRpcServer = DeeplinkRpcServer()
     ..registerHandler(
       DeeplinkRpcRequestHandler(
         route: const DeeplinkRpcRoute('a_rpc_command'),
@@ -107,7 +107,7 @@ class MyApp extends StatelessWidget {
       home: const SendForm(),
       onGenerateRoute: (settings) {
         /// 3. Listen to incoming deeplink requests
-        if (_deeplinkRpcReceiver.handleRoute(settings.name)) return;
+        if (_deeplinkRpcServer.handleRoute(settings.name)) return;
 
         // ... do other route generation stuffs here.
         return null;

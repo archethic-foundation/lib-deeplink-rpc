@@ -17,14 +17,13 @@ class DeeplinkRpcRoute with _$DeeplinkRpcRoute {
   ) = _DeeplinkRpcRoute;
   const DeeplinkRpcRoute._();
 
-  RegExp get _pathRegex =>
-      RegExp('/$pathFirstSegment/(?<data>[a-zA-Z0-9=+/]*)');
+  static RegExp get _pathRegex => RegExp('/.*/(?<data>[a-zA-Z0-9-_=]*)');
 
   /// Does the path match the Route.
   bool matches(String path) => _pathRegex.hasMatch(path);
 
   /// Extracts data payload from the path.
-  String? getData(String? path) {
+  static String? getData(String? path) {
     if (path == null) return null;
 
     final matches = _pathRegex.allMatches(path);

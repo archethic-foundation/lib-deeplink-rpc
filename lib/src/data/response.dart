@@ -1,5 +1,4 @@
 /// SPDX-License-Identifier: AGPL-3.0-or-later
-import 'package:deeplink_rpc/src/codec.dart';
 import 'package:deeplink_rpc/src/data/failure.dart';
 import 'package:deeplink_rpc/src/data/result.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -17,8 +16,6 @@ class DeeplinkRpcResponse {
           failure == null || result == null,
           'A response cannot be both success and failure.',
         );
-  factory DeeplinkRpcResponse.decode(String data) =>
-      DeeplinkRpcResponse.fromJson(deeplinkRpc.decode(data));
 
   factory DeeplinkRpcResponse.fromJson(Map<String, dynamic> json) =>
       _$DeeplinkRpcResponseFromJson(json);
@@ -54,8 +51,6 @@ class DeeplinkRpcResponse {
   }
 
   Map<String, dynamic> toJson() => _$DeeplinkRpcResponseToJson(this);
-
-  String encode() => deeplinkRpc.encode(toJson());
 }
 
 extension DeeplinkRpcResultExt on DeeplinkRpcResult {
