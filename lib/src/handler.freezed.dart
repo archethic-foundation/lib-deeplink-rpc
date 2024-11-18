@@ -16,9 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DeeplinkRpcRoute {
-  String get pathFirstSegment => throw _privateConstructorUsedError;
+  String get path => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeeplinkRpcRoute
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DeeplinkRpcRouteCopyWith<DeeplinkRpcRoute> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -29,7 +31,7 @@ abstract class $DeeplinkRpcRouteCopyWith<$Res> {
           DeeplinkRpcRoute value, $Res Function(DeeplinkRpcRoute) then) =
       _$DeeplinkRpcRouteCopyWithImpl<$Res, DeeplinkRpcRoute>;
   @useResult
-  $Res call({String pathFirstSegment});
+  $Res call({String path});
 }
 
 /// @nodoc
@@ -42,15 +44,17 @@ class _$DeeplinkRpcRouteCopyWithImpl<$Res, $Val extends DeeplinkRpcRoute>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DeeplinkRpcRoute
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pathFirstSegment = null,
+    Object? path = null,
   }) {
     return _then(_value.copyWith(
-      pathFirstSegment: null == pathFirstSegment
-          ? _value.pathFirstSegment
-          : pathFirstSegment // ignore: cast_nullable_to_non_nullable
+      path: null == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -64,7 +68,7 @@ abstract class _$$DeeplinkRpcRouteImplCopyWith<$Res>
       __$$DeeplinkRpcRouteImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String pathFirstSegment});
+  $Res call({String path});
 }
 
 /// @nodoc
@@ -75,15 +79,17 @@ class __$$DeeplinkRpcRouteImplCopyWithImpl<$Res>
       $Res Function(_$DeeplinkRpcRouteImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DeeplinkRpcRoute
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pathFirstSegment = null,
+    Object? path = null,
   }) {
     return _then(_$DeeplinkRpcRouteImpl(
-      null == pathFirstSegment
-          ? _value.pathFirstSegment
-          : pathFirstSegment // ignore: cast_nullable_to_non_nullable
+      null == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -92,14 +98,14 @@ class __$$DeeplinkRpcRouteImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DeeplinkRpcRouteImpl extends _DeeplinkRpcRoute {
-  const _$DeeplinkRpcRouteImpl(this.pathFirstSegment) : super._();
+  const _$DeeplinkRpcRouteImpl(this.path) : super._();
 
   @override
-  final String pathFirstSegment;
+  final String path;
 
   @override
   String toString() {
-    return 'DeeplinkRpcRoute(pathFirstSegment: $pathFirstSegment)';
+    return 'DeeplinkRpcRoute(path: $path)';
   }
 
   @override
@@ -107,14 +113,15 @@ class _$DeeplinkRpcRouteImpl extends _DeeplinkRpcRoute {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeeplinkRpcRouteImpl &&
-            (identical(other.pathFirstSegment, pathFirstSegment) ||
-                other.pathFirstSegment == pathFirstSegment));
+            (identical(other.path, path) || other.path == path));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, pathFirstSegment);
+  int get hashCode => Object.hash(runtimeType, path);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeeplinkRpcRoute
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeeplinkRpcRouteImplCopyWith<_$DeeplinkRpcRouteImpl> get copyWith =>
@@ -123,14 +130,16 @@ class _$DeeplinkRpcRouteImpl extends _DeeplinkRpcRoute {
 }
 
 abstract class _DeeplinkRpcRoute extends DeeplinkRpcRoute {
-  const factory _DeeplinkRpcRoute(final String pathFirstSegment) =
-      _$DeeplinkRpcRouteImpl;
+  const factory _DeeplinkRpcRoute(final String path) = _$DeeplinkRpcRouteImpl;
   const _DeeplinkRpcRoute._() : super._();
 
   @override
-  String get pathFirstSegment;
+  String get path;
+
+  /// Create a copy of DeeplinkRpcRoute
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeeplinkRpcRouteImplCopyWith<_$DeeplinkRpcRouteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -141,7 +150,9 @@ mixin _$DeeplinkRpcRequestHandler {
   FutureOr<Map<String, dynamic>> Function(DeeplinkRpcRequest) get handle =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeeplinkRpcRequestHandler
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DeeplinkRpcRequestHandlerCopyWith<DeeplinkRpcRequestHandler> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -170,6 +181,8 @@ class _$DeeplinkRpcRequestHandlerCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DeeplinkRpcRequestHandler
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -188,6 +201,8 @@ class _$DeeplinkRpcRequestHandlerCopyWithImpl<$Res,
     ) as $Val);
   }
 
+  /// Create a copy of DeeplinkRpcRequestHandler
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DeeplinkRpcRouteCopyWith<$Res> get route {
@@ -224,6 +239,8 @@ class __$$DeeplinkRpcRequestHandlerImplCopyWithImpl<$Res>
       $Res Function(_$DeeplinkRpcRequestHandlerImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DeeplinkRpcRequestHandler
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -272,7 +289,9 @@ class _$DeeplinkRpcRequestHandlerImpl extends _DeeplinkRpcRequestHandler {
   @override
   int get hashCode => Object.hash(runtimeType, route, handle);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeeplinkRpcRequestHandler
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeeplinkRpcRequestHandlerImplCopyWith<_$DeeplinkRpcRequestHandlerImpl>
@@ -291,8 +310,11 @@ abstract class _DeeplinkRpcRequestHandler extends DeeplinkRpcRequestHandler {
   DeeplinkRpcRoute get route;
   @override
   FutureOr<Map<String, dynamic>> Function(DeeplinkRpcRequest) get handle;
+
+  /// Create a copy of DeeplinkRpcRequestHandler
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeeplinkRpcRequestHandlerImplCopyWith<_$DeeplinkRpcRequestHandlerImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -303,7 +325,9 @@ mixin _$DeeplinkRpcResponseHandler {
   FutureOr<void> Function(DeeplinkRpcResponse) get handle =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeeplinkRpcResponseHandler
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DeeplinkRpcResponseHandlerCopyWith<DeeplinkRpcResponseHandler>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -333,6 +357,8 @@ class _$DeeplinkRpcResponseHandlerCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DeeplinkRpcResponseHandler
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -351,6 +377,8 @@ class _$DeeplinkRpcResponseHandlerCopyWithImpl<$Res,
     ) as $Val);
   }
 
+  /// Create a copy of DeeplinkRpcResponseHandler
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DeeplinkRpcRouteCopyWith<$Res> get route {
@@ -387,6 +415,8 @@ class __$$DeeplinkRpcResponseHandlerImplCopyWithImpl<$Res>
       $Res Function(_$DeeplinkRpcResponseHandlerImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DeeplinkRpcResponseHandler
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -435,7 +465,9 @@ class _$DeeplinkRpcResponseHandlerImpl extends _DeeplinkRpcResponseHandler {
   @override
   int get hashCode => Object.hash(runtimeType, route, handle);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeeplinkRpcResponseHandler
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeeplinkRpcResponseHandlerImplCopyWith<_$DeeplinkRpcResponseHandlerImpl>
@@ -454,8 +486,11 @@ abstract class _DeeplinkRpcResponseHandler extends DeeplinkRpcResponseHandler {
   DeeplinkRpcRoute get route;
   @override
   FutureOr<void> Function(DeeplinkRpcResponse) get handle;
+
+  /// Create a copy of DeeplinkRpcResponseHandler
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeeplinkRpcResponseHandlerImplCopyWith<_$DeeplinkRpcResponseHandlerImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
