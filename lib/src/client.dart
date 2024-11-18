@@ -44,7 +44,9 @@ class DeeplinkRpcClient {
   void _registerResponseHandler(DeeplinkRpcRequest request) {
     _deeplinkRpcReceiver.registerHandler(
       DeeplinkRpcResponseHandler(
-        route: DeeplinkRpcRoute(Uri.parse(request.replyUrl).pathSegments.first),
+        route: DeeplinkRpcRoute(
+          Uri.parse(request.replyUrl).path,
+        ),
         handle: _completeRequest,
       ),
     );
@@ -62,10 +64,10 @@ class DeeplinkRpcClient {
     _runningRequests.remove(response.id);
   }
 
-  bool handleResponse(String? path) {
-    if (!_deeplinkRpcReceiver.canHandle(path)) return false;
+  bool handleResponse(Uri uri) {
+    if (!_deeplinkRpcReceiver.canHandle(uri)) return false;
 
-    unawaited(_deeplinkRpcReceiver.handle(path));
+    unawaited(_deeplinkRpcReceiver.handle(uri));
     return true;
   }
 
@@ -83,7 +85,16 @@ class DeeplinkRpcClient {
       );
     }
 
-    final url = Uri.parse('${request.requestUrl}/${_encodeRequest(request)}');
+    final replyUri = Uri.parse(request.requestUrl);
+
+    final url = Uri(
+      scheme: replyUri.scheme,
+      host: replyUri.host,
+      path: replyUri.path,
+      queryParameters: {
+        DeeplinkRpcRoute.dataParameter: _encodeRequest(request),
+      },
+    );
 
     _logger.fine('Attempt to send request $url');
 
@@ -105,8 +116,22 @@ class DeeplinkRpcClient {
     );
     _runningRequests[request.id] = runningRequest;
 
-    await _urlLauncher.launchUrl(
-      url,
+    unawaited(
+      _urlLauncher.launchUrl(url, logger: _logger).then(
+        (launchSucceed) {
+          if (!launchSucceed) {
+            _completeRequest(
+              DeeplinkRpcResponse.failure(
+                id: request.id,
+                failure: const DeeplinkRpcFailure(
+                  code: DeeplinkRpcFailure.kInvalidRequest,
+                  message: 'Unable to launch deeplink',
+                ),
+              ),
+            );
+          }
+        },
+      ),
     );
 
     return runningRequest.completer.future;
@@ -127,21 +152,21 @@ class _DeeplinkRpcResponseReceiver
 
   final DeeplinkRpcCodec codec;
 
-  Future<void> handle(String? path) async {
+  Future<void> handle(Uri uri) async {
     try {
       _logger.info(
         'Handles RPC response',
       );
 
-      final handler = handlerForPath(path);
+      final handler = handlerForPath(uri);
       if (handler == null) {
         throw DeeplinkRpcFailure(
           code: DeeplinkRpcFailure.kInvalidRequest,
-          message: 'No handler for path $path',
+          message: 'No handler for path $uri',
         );
       }
 
-      final data = DeeplinkRpcRoute.getData(path);
+      final data = DeeplinkRpcRoute.getData(uri);
 
       if (data == null) {
         throw const DeeplinkRpcFailure(

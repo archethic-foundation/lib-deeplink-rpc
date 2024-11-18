@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DeeplinkRpcRoute {
-  String get pathFirstSegment => throw _privateConstructorUsedError;
+  String get path => throw _privateConstructorUsedError;
 
   /// Create a copy of DeeplinkRpcRoute
   /// with the given fields replaced by the non-null parameter values.
@@ -31,7 +31,7 @@ abstract class $DeeplinkRpcRouteCopyWith<$Res> {
           DeeplinkRpcRoute value, $Res Function(DeeplinkRpcRoute) then) =
       _$DeeplinkRpcRouteCopyWithImpl<$Res, DeeplinkRpcRoute>;
   @useResult
-  $Res call({String pathFirstSegment});
+  $Res call({String path});
 }
 
 /// @nodoc
@@ -49,12 +49,12 @@ class _$DeeplinkRpcRouteCopyWithImpl<$Res, $Val extends DeeplinkRpcRoute>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pathFirstSegment = null,
+    Object? path = null,
   }) {
     return _then(_value.copyWith(
-      pathFirstSegment: null == pathFirstSegment
-          ? _value.pathFirstSegment
-          : pathFirstSegment // ignore: cast_nullable_to_non_nullable
+      path: null == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -68,7 +68,7 @@ abstract class _$$DeeplinkRpcRouteImplCopyWith<$Res>
       __$$DeeplinkRpcRouteImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String pathFirstSegment});
+  $Res call({String path});
 }
 
 /// @nodoc
@@ -84,12 +84,12 @@ class __$$DeeplinkRpcRouteImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pathFirstSegment = null,
+    Object? path = null,
   }) {
     return _then(_$DeeplinkRpcRouteImpl(
-      null == pathFirstSegment
-          ? _value.pathFirstSegment
-          : pathFirstSegment // ignore: cast_nullable_to_non_nullable
+      null == path
+          ? _value.path
+          : path // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -98,14 +98,14 @@ class __$$DeeplinkRpcRouteImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DeeplinkRpcRouteImpl extends _DeeplinkRpcRoute {
-  const _$DeeplinkRpcRouteImpl(this.pathFirstSegment) : super._();
+  const _$DeeplinkRpcRouteImpl(this.path) : super._();
 
   @override
-  final String pathFirstSegment;
+  final String path;
 
   @override
   String toString() {
-    return 'DeeplinkRpcRoute(pathFirstSegment: $pathFirstSegment)';
+    return 'DeeplinkRpcRoute(path: $path)';
   }
 
   @override
@@ -113,12 +113,11 @@ class _$DeeplinkRpcRouteImpl extends _DeeplinkRpcRoute {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeeplinkRpcRouteImpl &&
-            (identical(other.pathFirstSegment, pathFirstSegment) ||
-                other.pathFirstSegment == pathFirstSegment));
+            (identical(other.path, path) || other.path == path));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, pathFirstSegment);
+  int get hashCode => Object.hash(runtimeType, path);
 
   /// Create a copy of DeeplinkRpcRoute
   /// with the given fields replaced by the non-null parameter values.
@@ -131,12 +130,11 @@ class _$DeeplinkRpcRouteImpl extends _DeeplinkRpcRoute {
 }
 
 abstract class _DeeplinkRpcRoute extends DeeplinkRpcRoute {
-  const factory _DeeplinkRpcRoute(final String pathFirstSegment) =
-      _$DeeplinkRpcRouteImpl;
+  const factory _DeeplinkRpcRoute(final String path) = _$DeeplinkRpcRouteImpl;
   const _DeeplinkRpcRoute._() : super._();
 
   @override
-  String get pathFirstSegment;
+  String get path;
 
   /// Create a copy of DeeplinkRpcRoute
   /// with the given fields replaced by the non-null parameter values.

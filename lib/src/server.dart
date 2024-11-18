@@ -24,13 +24,13 @@ class DeeplinkRpcServer
   final UrlLauncher urlLauncher;
   final DeeplinkRpcCodec codec;
 
-  Future<DeeplinkRpcResult> _handle(String? path) async {
+  Future<DeeplinkRpcResult> _handle(Uri uri) async {
     try {
       _logger.info(
         'Handles RPC call',
       );
 
-      final data = DeeplinkRpcRoute.getData(path);
+      final data = DeeplinkRpcRoute.getData(uri);
       if (data == null) {
         return const DeeplinkRpcResult.failure(
           failure: DeeplinkRpcFailure(
@@ -41,14 +41,14 @@ class DeeplinkRpcServer
       }
       final request = _decodeRequest(data);
 
-      final handler = handlerForPath(path);
+      final handler = handlerForPath(uri);
       if (handler == null) {
         return DeeplinkRpcResult.failure(
           request: request,
           failure: DeeplinkRpcFailure(
             data: request,
             code: DeeplinkRpcFailure.kInvalidRequest,
-            message: 'No handler for path $path',
+            message: 'No handler for path $uri',
           ),
         );
       }
@@ -91,8 +91,8 @@ class DeeplinkRpcServer
     }
   }
 
-  Future<void> handle(String? path) async {
-    final result = await _handle(path);
+  Future<void> handle(Uri uri) async {
+    final result = await _handle(uri);
 
     final request = result.request;
     final response = result.toResponse();
@@ -104,8 +104,18 @@ class DeeplinkRpcServer
       return;
     }
 
+    final replyUri = Uri.parse(request.replyUrl);
+
     await urlLauncher.launchUrl(
-      Uri.parse('${request.replyUrl}/${_encodeResponse(response)}'),
+      Uri(
+        scheme: replyUri.scheme,
+        host: replyUri.host,
+        path: replyUri.path,
+        queryParameters: {
+          DeeplinkRpcRoute.dataParameter: _encodeResponse(response),
+        },
+      ),
+      logger: _logger,
     );
   }
 

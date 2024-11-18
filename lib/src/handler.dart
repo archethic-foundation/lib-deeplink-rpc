@@ -1,36 +1,38 @@
 /// SPDX-License-Identifier: AGPL-3.0-or-later
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:deeplink_rpc/src/data/request.dart';
 import 'package:deeplink_rpc/src/data/response.dart';
+import 'package:deeplink_rpc/src/utils.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'handler.freezed.dart';
 
 /// Route receiving a Deeplink
 ///
-/// Deeplink path follows the format '/<parametrable_path_prefix>/<base64_payload>'
+/// Deeplink path follows the format '/<parametrable_path_prefix>?<base64_payload>'
 @freezed
 class DeeplinkRpcRoute with _$DeeplinkRpcRoute {
   const factory DeeplinkRpcRoute(
-    String pathFirstSegment,
+    String path,
   ) = _DeeplinkRpcRoute;
   const DeeplinkRpcRoute._();
 
-  static RegExp get _pathRegex => RegExp('/.*/(?<data>[a-zA-Z0-9-_=]*)');
+  static const dataParameter = 'rd';
 
   /// Does the path match the Route.
-  bool matches(String path) => _pathRegex.hasMatch(path);
+  bool matches(Uri uri) {
+    final matches = uri.path.strip('/') == path.strip('/');
+    log('Does $uri matches $path ? $matches');
+    return matches;
+  }
 
   /// Extracts data payload from the path.
-  static String? getData(String? path) {
+  static String? getData(Uri? path) {
     if (path == null) return null;
 
-    final matches = _pathRegex.allMatches(path);
-    if (matches.isEmpty) {
-      return null;
-    }
-    return matches.first.namedGroup('data');
+    return path.queryParameters[dataParameter];
   }
 }
 

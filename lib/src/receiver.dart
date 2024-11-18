@@ -6,10 +6,10 @@ abstract class BaseDeeplinkRpcReceiver<T extends DeeplinkRpcHandler> {
 
   static final _logger = Logger('DeeplinkRPCReceiver');
 
-  T? handlerForPath(String? path) {
-    if (path == null) return null;
+  T? handlerForPath(Uri? uri) {
+    if (uri == null) return null;
     return _routeHandlers.cast<T?>().firstWhere(
-          (handler) => handler?.route.matches(path) ?? false,
+          (handler) => handler?.route.matches(uri) ?? false,
           orElse: () => null,
         );
   }
@@ -17,16 +17,16 @@ abstract class BaseDeeplinkRpcReceiver<T extends DeeplinkRpcHandler> {
   void registerHandler(T handler) {
     if (_routeHandlers.contains(handler)) {
       _logger.info(
-        'A route handler is already registered for ${handler.route.pathFirstSegment}',
+        'A route handler is already registered for ${handler.route.path}',
       );
       return;
     }
     _routeHandlers.add(handler);
   }
 
-  bool canHandle(String? path) {
-    if (path == null) return false;
+  bool canHandle(Uri? uri) {
+    if (uri == null) return false;
 
-    return handlerForPath(path) != null;
+    return handlerForPath(uri) != null;
   }
 }
