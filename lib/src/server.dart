@@ -110,7 +110,9 @@ class DeeplinkRpcServer
       Uri(
         scheme: replyUri.scheme,
         host: replyUri.host,
+        port: replyUri.port,
         path: replyUri.path,
+        fragment: replyUri.fragment,
         queryParameters: {
           DeeplinkRpcRoute.dataParameter: _encodeResponse(response),
         },

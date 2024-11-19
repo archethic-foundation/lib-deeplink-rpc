@@ -34,11 +34,25 @@ void main() {
   late MockUrlLauncher serverUrlLauncherMock;
   late DeeplinkRpcServer server;
 
+  bool _isSameOrigin(Uri uri1, Uri uri2) {
+    return uri1.scheme == uri2.scheme &&
+        uri1.host == uri2.host &&
+        uri1.port == uri2.port &&
+        uri1.path == uri2.path &&
+        uri1.fragment == uri2.fragment;
+  }
+
   void _setupClientAndServer({
     DeeplinkRpcCodec? clientCodec,
+    String serverBasePath = 'serverapp://server.app/request_endpoint',
+    String clientBasePath = 'clientapp://client.app/reply_endpoint',
   }) {
+    final serverBaseUri = Uri.parse(serverBasePath);
     clientUrlLauncherMock = MockUrlLauncher(
       launchUrl: (uri) async {
+        if (!_isSameOrigin(uri, serverBaseUri)) {
+          return false;
+        }
         await server.handle(
           Uri(
             path: uri.path,
@@ -52,8 +66,13 @@ void main() {
       urlLauncher: clientUrlLauncherMock,
       codec: clientCodec,
     );
+    final clientBaseUri = Uri.parse(clientBasePath);
     serverUrlLauncherMock = MockUrlLauncher(
       launchUrl: (uri) async {
+        if (!_isSameOrigin(uri, clientBaseUri)) {
+          return false;
+        }
+
         return client.handleResponse(
           Uri(
             path: uri.path,
@@ -79,35 +98,50 @@ void main() {
   }
 
   for (final setup in [
-    // (
-    //   name: 'Without end /',
-    //   serverRoute: '/request_endpoint',
-    //   requestUrl: 'serverapp://server.app/request_endpoint',
-    //   replyUrl: 'clientapp://client.app/reply_endpoint',
-    // ),
-    // (
-    //   name: 'With end /',
-    //   serverRoute: '/request_endpoint/',
-    //   requestUrl: 'serverapp://server.app/request_endpoint',
-    //   replyUrl: 'clientapp://client.app/reply_endpoint',
-    // ),
-    // (
-    //   name: 'Mixed end /',
-    //   serverRoute: '/request_endpoint',
-    //   requestUrl: 'serverapp://server.app/request_endpoint/',
-    //   replyUrl: 'clientapp://client.app/reply_endpoint',
-    // ),
+    (
+      name: 'Without end /',
+      serverRoute: '/request_endpoint',
+      requestUrl: 'serverapp://server.app/request_endpoint',
+      replyUrl: 'clientapp://client.app/reply_endpoint',
+    ),
+    (
+      name: 'With end /',
+      serverRoute: '/request_endpoint/',
+      requestUrl: 'serverapp://server.app/request_endpoint',
+      replyUrl: 'clientapp://client.app/reply_endpoint',
+    ),
+    (
+      name: 'Mixed end /',
+      serverRoute: '/request_endpoint',
+      requestUrl: 'serverapp://server.app/request_endpoint/',
+      replyUrl: 'clientapp://client.app/reply_endpoint',
+    ),
     (
       name: 'Reply on /',
       serverRoute: '/request_endpoint',
       requestUrl: 'serverapp://server.app/request_endpoint/',
       replyUrl: 'clientapp://client.app/',
     ),
+    (
+      name: 'Use ip address with port',
+      serverRoute: '/request_endpoint',
+      requestUrl: 'serverapp://server.app/request_endpoint/',
+      replyUrl: 'http://192.168.1.12:8080/request_endpoint/',
+    ),
+    (
+      name: 'Use replyUrl with fragment',
+      serverRoute: '/request_endpoint',
+      requestUrl: 'serverapp://server.app/request_endpoint/',
+      replyUrl: 'http://192.168.1.12:8080/#/request_endpoint/',
+    ),
   ]) {
     test(
         'Client should receive a success response when call is valid (${setup.name})',
         () async {
-      _setupClientAndServer();
+      _setupClientAndServer(
+        clientBasePath: setup.replyUrl,
+        serverBasePath: setup.requestUrl,
+      );
       server.registerHandler(
         DeeplinkRpcRequestHandler(
           route: DeeplinkRpcRoute(setup.serverRoute),
