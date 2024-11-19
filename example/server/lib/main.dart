@@ -33,12 +33,26 @@ final _logger = Logger('DeeplinkRPCServer');
 final _deeplinkRpcServer = DeeplinkRpcServer()
   ..registerHandler(
     DeeplinkRpcRequestHandler(
-      route: const DeeplinkRpcRoute('/request_endpoint/'),
+      route: const DeeplinkRpcRoute('/'),
       handle: (request) async {
-        _logger.info('Command received');
-        return {
-          'response_parameter': 'a response',
-        };
+        final command = request.params['command'];
+        switch (command) {
+          case 'command_1':
+            _logger.info('Command 1 received');
+            return {
+              'message': 'Command 1 succeeds !',
+            };
+          case 'command_2':
+            _logger.info('Command 2 received');
+            return {
+              'message': 'Command 2 succeeds !',
+            };
+          default:
+            throw DeeplinkRpcFailure(
+              code: DeeplinkRpcFailure.kInvalidRequest,
+              message: 'Invalid command : $command',
+            );
+        }
       },
     ),
   );
