@@ -59,6 +59,7 @@ class DeeplinkRpcClient {
 
     if (runningRequest == null) return;
 
+    if (runningRequest.completer.isCompleted) return;
     runningRequest.completer.complete(response);
 
     _runningRequests.remove(response.id);
@@ -190,6 +191,8 @@ class _DeeplinkRpcResponseReceiver
         e,
         stack,
       );
+      if (e is DeeplinkRpcFailure) rethrow;
+
       throw const DeeplinkRpcResult.failure(
         failure: DeeplinkRpcFailure(
           code: DeeplinkRpcFailure.kServerError,
