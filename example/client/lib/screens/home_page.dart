@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:deeplink_rpc/deeplink_rpc.dart';
 import 'package:deeplink_rpc_client_example/main.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:json_rpc_2/json_rpc_2.dart';
 import 'package:logging/logging.dart';
 
 class HomePage extends StatelessWidget {
@@ -41,41 +41,29 @@ class _SendRequestButton extends StatelessWidget {
     return FloatingActionButton(
       child: const Icon(Icons.send),
       onPressed: () async {
-        final response = await deeplinkRpcClient.send(
-          request: DeeplinkRpcRequest(
-            requestUrl: 'deeplinkrpcserverexample://rpc.deeplink.server/',
-            // requestUrl: 'http://192.168.1.22:8081/',
-            replyUrl: 'http://192.168.1.22:8081/',
-            // replyUrl: 'deeplinkrpcclientexample://rpc.deeplink.client/',
-            params: {
-              'command': 'command_1',
+        try {
+          final response = await peer.sendRequest(
+            'command_12',
+            {
               'param1': 'value1',
               'param2': 'value2',
             },
-          ),
-        );
+          );
 
-        response.map(
-          failure: (failure) {
-            _logger.severe(
-              'RPC request failed',
-              failure,
-            );
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(failure.message ?? 'An error occured'),
-              ),
-            );
-          },
-          success: (result) {
-            _logger.info(
-              'RPC request succeed : ${json.encode(result)}',
-            );
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(json.encode(result))),
-            );
-          },
-        );
+          _logger.info(
+            'RPC request succeed : ${json.encode(response)}',
+          );
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(json.encode(response))),
+          );
+        } on RpcException catch (e) {
+          _logger.severe(
+            'RPC request failed : ${e.message}',
+          );
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(e.message)),
+          );
+        }
       },
     );
   }

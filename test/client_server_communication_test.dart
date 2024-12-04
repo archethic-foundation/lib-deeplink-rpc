@@ -186,7 +186,7 @@ void main() {
         request: DeeplinkRpcRequest(
           requestUrl: setup.requestUrl,
           replyUrl: setup.replyUrl,
-          params: {
+          payload: {
             'clientProp1': 'value1',
             'clientProp2': 2,
           },
@@ -244,7 +244,7 @@ void main() {
       request: DeeplinkRpcRequest(
         requestUrl: 'serverapp://server.app/request_endpoint',
         replyUrl: 'clientapp://client.app/reply_endpoint',
-        params: {
+        payload: {
           'clientProp1': 'value1',
           'clientProp2': 2,
         },
@@ -278,7 +278,7 @@ void main() {
       request: DeeplinkRpcRequest(
         requestUrl: 'serverapp://server.app/request_endpoint',
         replyUrl: 'clientapp://client.app/reply_endpoint',
-        params: {},
+        payload: {},
       ),
     );
     expect(
@@ -299,7 +299,7 @@ void main() {
       request: DeeplinkRpcRequest(
         requestUrl: 'serverapp://server.app/unknown_endpoint',
         replyUrl: 'clientapp://client.app/reply_endpoint',
-        params: {},
+        payload: {},
       ),
     );
     expect(

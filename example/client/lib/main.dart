@@ -1,4 +1,5 @@
 /// SPDX-License-Identifier: AGPL-3.0-or-later
+import 'dart:async';
 import 'dart:developer' as dev;
 
 import 'package:deeplink_rpc/deeplink_rpc.dart';
@@ -6,9 +7,14 @@ import 'package:deeplink_rpc_client_example/screens/home_page.dart';
 import 'package:deeplink_rpc_client_example/screens/other_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:json_rpc_2/json_rpc_2.dart';
 import 'package:logging/logging.dart';
 
-DeeplinkRpcClient deeplinkRpcClient = DeeplinkRpcClient();
+final client = DeeplinRPCClientStreamChannel(
+  clientUrl: 'deeplinkrpcclientexample://rpc.deeplink.client/',
+  serverUrl: 'deeplinkrpcserverexample://rpc.deeplink.server/',
+);
+final peer = Peer(client.cast<String>());
 
 void main() {
   Logger.root.onRecord.listen((event) {
@@ -23,7 +29,7 @@ void main() {
       zone: event.zone,
     );
   });
-
+  unawaited(peer.listen());
   runApp(const MyApp());
 }
 
@@ -50,7 +56,7 @@ class MyApp extends StatelessWidget {
           ),
         ],
         redirect: (context, state) async {
-          deeplinkRpcClient.handleResponse(state.uri);
+          await client.client.handleResponse(state.uri);
           return null;
         },
       ),

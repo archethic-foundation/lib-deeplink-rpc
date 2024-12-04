@@ -18,6 +18,8 @@ dependencies:
 
   go_router: ^13.2.0
 
+  json_rpc_2:
+
   logging: ^1.2.0
 
 dev_dependencies:
