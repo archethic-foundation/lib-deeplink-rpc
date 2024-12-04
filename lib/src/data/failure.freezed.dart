@@ -14,18 +14,11 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-DeeplinkRpcFailure _$DeeplinkRpcFailureFromJson(Map<String, dynamic> json) {
-  return _DeeplinkRpcFailure.fromJson(json);
-}
-
 /// @nodoc
 mixin _$DeeplinkRpcFailure {
+  DeeplinkRpcRequest get request => throw _privateConstructorUsedError;
   int get code => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
-  dynamic get data => throw _privateConstructorUsedError;
-
-  /// Serializes this DeeplinkRpcFailure to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of DeeplinkRpcFailure
   /// with the given fields replaced by the non-null parameter values.
@@ -40,7 +33,9 @@ abstract class $DeeplinkRpcFailureCopyWith<$Res> {
           DeeplinkRpcFailure value, $Res Function(DeeplinkRpcFailure) then) =
       _$DeeplinkRpcFailureCopyWithImpl<$Res, DeeplinkRpcFailure>;
   @useResult
-  $Res call({int code, String? message, dynamic data});
+  $Res call({DeeplinkRpcRequest request, int code, String? message});
+
+  $DeeplinkRpcRequestCopyWith<$Res> get request;
 }
 
 /// @nodoc
@@ -58,11 +53,15 @@ class _$DeeplinkRpcFailureCopyWithImpl<$Res, $Val extends DeeplinkRpcFailure>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? request = null,
     Object? code = null,
     Object? message = freezed,
-    Object? data = freezed,
   }) {
     return _then(_value.copyWith(
+      request: null == request
+          ? _value.request
+          : request // ignore: cast_nullable_to_non_nullable
+              as DeeplinkRpcRequest,
       code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -71,11 +70,17 @@ class _$DeeplinkRpcFailureCopyWithImpl<$Res, $Val extends DeeplinkRpcFailure>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as dynamic,
     ) as $Val);
+  }
+
+  /// Create a copy of DeeplinkRpcFailure
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DeeplinkRpcRequestCopyWith<$Res> get request {
+    return $DeeplinkRpcRequestCopyWith<$Res>(_value.request, (value) {
+      return _then(_value.copyWith(request: value) as $Val);
+    });
   }
 }
 
@@ -87,7 +92,10 @@ abstract class _$$DeeplinkRpcFailureImplCopyWith<$Res>
       __$$DeeplinkRpcFailureImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int code, String? message, dynamic data});
+  $Res call({DeeplinkRpcRequest request, int code, String? message});
+
+  @override
+  $DeeplinkRpcRequestCopyWith<$Res> get request;
 }
 
 /// @nodoc
@@ -103,11 +111,15 @@ class __$$DeeplinkRpcFailureImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? request = null,
     Object? code = null,
     Object? message = freezed,
-    Object? data = freezed,
   }) {
     return _then(_$DeeplinkRpcFailureImpl(
+      request: null == request
+          ? _value.request
+          : request // ignore: cast_nullable_to_non_nullable
+              as DeeplinkRpcRequest,
       code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
@@ -116,33 +128,27 @@ class __$$DeeplinkRpcFailureImplCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as dynamic,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$DeeplinkRpcFailureImpl extends _DeeplinkRpcFailure {
-  const _$DeeplinkRpcFailureImpl({required this.code, this.message, this.data})
+  const _$DeeplinkRpcFailureImpl(
+      {required this.request, required this.code, this.message})
       : super._();
 
-  factory _$DeeplinkRpcFailureImpl.fromJson(Map<String, dynamic> json) =>
-      _$$DeeplinkRpcFailureImplFromJson(json);
-
+  @override
+  final DeeplinkRpcRequest request;
   @override
   final int code;
   @override
   final String? message;
-  @override
-  final dynamic data;
 
   @override
   String toString() {
-    return 'DeeplinkRpcFailure(code: $code, message: $message, data: $data)';
+    return 'DeeplinkRpcFailure(request: $request, code: $code, message: $message)';
   }
 
   @override
@@ -150,15 +156,13 @@ class _$DeeplinkRpcFailureImpl extends _DeeplinkRpcFailure {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeeplinkRpcFailureImpl &&
+            (identical(other.request, request) || other.request == request) &&
             (identical(other.code, code) || other.code == code) &&
-            (identical(other.message, message) || other.message == message) &&
-            const DeepCollectionEquality().equals(other.data, data));
+            (identical(other.message, message) || other.message == message));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, code, message, const DeepCollectionEquality().hash(data));
+  int get hashCode => Object.hash(runtimeType, request, code, message);
 
   /// Create a copy of DeeplinkRpcFailure
   /// with the given fields replaced by the non-null parameter values.
@@ -168,31 +172,21 @@ class _$DeeplinkRpcFailureImpl extends _DeeplinkRpcFailure {
   _$$DeeplinkRpcFailureImplCopyWith<_$DeeplinkRpcFailureImpl> get copyWith =>
       __$$DeeplinkRpcFailureImplCopyWithImpl<_$DeeplinkRpcFailureImpl>(
           this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$DeeplinkRpcFailureImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _DeeplinkRpcFailure extends DeeplinkRpcFailure {
   const factory _DeeplinkRpcFailure(
-      {required final int code,
-      final String? message,
-      final dynamic data}) = _$DeeplinkRpcFailureImpl;
+      {required final DeeplinkRpcRequest request,
+      required final int code,
+      final String? message}) = _$DeeplinkRpcFailureImpl;
   const _DeeplinkRpcFailure._() : super._();
 
-  factory _DeeplinkRpcFailure.fromJson(Map<String, dynamic> json) =
-      _$DeeplinkRpcFailureImpl.fromJson;
-
+  @override
+  DeeplinkRpcRequest get request;
   @override
   int get code;
   @override
   String? get message;
-  @override
-  dynamic get data;
 
   /// Create a copy of DeeplinkRpcFailure
   /// with the given fields replaced by the non-null parameter values.
