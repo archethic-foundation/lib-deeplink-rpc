@@ -20,13 +20,16 @@ DeeplinkRpcRequest _$DeeplinkRpcRequestFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DeeplinkRpcRequest {
-  String get id => throw _privateConstructorUsedError;
   String get requestUrl => throw _privateConstructorUsedError;
   String get replyUrl => throw _privateConstructorUsedError;
-  Map<String, dynamic> get params => throw _privateConstructorUsedError;
+  Map<String, dynamic> get payload => throw _privateConstructorUsedError;
 
+  /// Serializes this DeeplinkRpcRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DeeplinkRpcRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DeeplinkRpcRequestCopyWith<DeeplinkRpcRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -37,11 +40,7 @@ abstract class $DeeplinkRpcRequestCopyWith<$Res> {
           DeeplinkRpcRequest value, $Res Function(DeeplinkRpcRequest) then) =
       _$DeeplinkRpcRequestCopyWithImpl<$Res, DeeplinkRpcRequest>;
   @useResult
-  $Res call(
-      {String id,
-      String requestUrl,
-      String replyUrl,
-      Map<String, dynamic> params});
+  $Res call({String requestUrl, String replyUrl, Map<String, dynamic> payload});
 }
 
 /// @nodoc
@@ -54,19 +53,16 @@ class _$DeeplinkRpcRequestCopyWithImpl<$Res, $Val extends DeeplinkRpcRequest>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DeeplinkRpcRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? requestUrl = null,
     Object? replyUrl = null,
-    Object? params = null,
+    Object? payload = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       requestUrl: null == requestUrl
           ? _value.requestUrl
           : requestUrl // ignore: cast_nullable_to_non_nullable
@@ -75,9 +71,9 @@ class _$DeeplinkRpcRequestCopyWithImpl<$Res, $Val extends DeeplinkRpcRequest>
           ? _value.replyUrl
           : replyUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      params: null == params
-          ? _value.params
-          : params // ignore: cast_nullable_to_non_nullable
+      payload: null == payload
+          ? _value.payload
+          : payload // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
     ) as $Val);
   }
@@ -91,11 +87,7 @@ abstract class _$$DeeplinkRpcRequestImplCopyWith<$Res>
       __$$DeeplinkRpcRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id,
-      String requestUrl,
-      String replyUrl,
-      Map<String, dynamic> params});
+  $Res call({String requestUrl, String replyUrl, Map<String, dynamic> payload});
 }
 
 /// @nodoc
@@ -106,19 +98,16 @@ class __$$DeeplinkRpcRequestImplCopyWithImpl<$Res>
       $Res Function(_$DeeplinkRpcRequestImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DeeplinkRpcRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? requestUrl = null,
     Object? replyUrl = null,
-    Object? params = null,
+    Object? payload = null,
   }) {
     return _then(_$DeeplinkRpcRequestImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       requestUrl: null == requestUrl
           ? _value.requestUrl
           : requestUrl // ignore: cast_nullable_to_non_nullable
@@ -127,9 +116,9 @@ class __$$DeeplinkRpcRequestImplCopyWithImpl<$Res>
           ? _value.replyUrl
           : replyUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      params: null == params
-          ? _value._params
-          : params // ignore: cast_nullable_to_non_nullable
+      payload: null == payload
+          ? _value._payload
+          : payload // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
     ));
   }
@@ -139,33 +128,30 @@ class __$$DeeplinkRpcRequestImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$DeeplinkRpcRequestImpl extends _DeeplinkRpcRequest {
   const _$DeeplinkRpcRequestImpl(
-      {required this.id,
-      required this.requestUrl,
+      {required this.requestUrl,
       required this.replyUrl,
-      required final Map<String, dynamic> params})
-      : _params = params,
+      required final Map<String, dynamic> payload})
+      : _payload = payload,
         super._();
 
   factory _$DeeplinkRpcRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$DeeplinkRpcRequestImplFromJson(json);
 
   @override
-  final String id;
-  @override
   final String requestUrl;
   @override
   final String replyUrl;
-  final Map<String, dynamic> _params;
+  final Map<String, dynamic> _payload;
   @override
-  Map<String, dynamic> get params {
-    if (_params is EqualUnmodifiableMapView) return _params;
+  Map<String, dynamic> get payload {
+    if (_payload is EqualUnmodifiableMapView) return _payload;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_params);
+    return EqualUnmodifiableMapView(_payload);
   }
 
   @override
   String toString() {
-    return 'DeeplinkRpcRequest._internal(id: $id, requestUrl: $requestUrl, replyUrl: $replyUrl, params: $params)';
+    return 'DeeplinkRpcRequest._internal(requestUrl: $requestUrl, replyUrl: $replyUrl, payload: $payload)';
   }
 
   @override
@@ -173,20 +159,21 @@ class _$DeeplinkRpcRequestImpl extends _DeeplinkRpcRequest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeeplinkRpcRequestImpl &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.requestUrl, requestUrl) ||
                 other.requestUrl == requestUrl) &&
             (identical(other.replyUrl, replyUrl) ||
                 other.replyUrl == replyUrl) &&
-            const DeepCollectionEquality().equals(other._params, _params));
+            const DeepCollectionEquality().equals(other._payload, _payload));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, requestUrl, replyUrl,
-      const DeepCollectionEquality().hash(_params));
+  int get hashCode => Object.hash(runtimeType, requestUrl, replyUrl,
+      const DeepCollectionEquality().hash(_payload));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeeplinkRpcRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeeplinkRpcRequestImplCopyWith<_$DeeplinkRpcRequestImpl> get copyWith =>
@@ -203,25 +190,25 @@ class _$DeeplinkRpcRequestImpl extends _DeeplinkRpcRequest {
 
 abstract class _DeeplinkRpcRequest extends DeeplinkRpcRequest {
   const factory _DeeplinkRpcRequest(
-      {required final String id,
-      required final String requestUrl,
+      {required final String requestUrl,
       required final String replyUrl,
-      required final Map<String, dynamic> params}) = _$DeeplinkRpcRequestImpl;
+      required final Map<String, dynamic> payload}) = _$DeeplinkRpcRequestImpl;
   const _DeeplinkRpcRequest._() : super._();
 
   factory _DeeplinkRpcRequest.fromJson(Map<String, dynamic> json) =
       _$DeeplinkRpcRequestImpl.fromJson;
 
   @override
-  String get id;
-  @override
   String get requestUrl;
   @override
   String get replyUrl;
   @override
-  Map<String, dynamic> get params;
+  Map<String, dynamic> get payload;
+
+  /// Create a copy of DeeplinkRpcRequest
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeeplinkRpcRequestImplCopyWith<_$DeeplinkRpcRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

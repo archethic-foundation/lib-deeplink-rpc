@@ -1,6 +1,5 @@
 /// SPDX-License-Identifier: AGPL-3.0-or-later
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:uuid/uuid.dart';
 
 part 'request.freezed.dart';
 part 'request.g.dart';
@@ -11,24 +10,24 @@ class DeeplinkRpcRequest with _$DeeplinkRpcRequest {
   factory DeeplinkRpcRequest({
     required String requestUrl,
     required String replyUrl,
-    Map<String, dynamic> params = const {},
+    Map<String, dynamic> payload = const {},
   }) =>
       DeeplinkRpcRequest._internal(
-        id: const Uuid().v4(), // TODOrename to `nonce`
         requestUrl: requestUrl,
         replyUrl: replyUrl,
-        params: params,
+        payload: payload,
       );
 
   const factory DeeplinkRpcRequest._internal({
-    required String id,
     required String requestUrl,
     required String replyUrl,
-    required Map<String, dynamic> params,
+    required Map<String, dynamic> payload,
   }) = _DeeplinkRpcRequest;
 
   factory DeeplinkRpcRequest.fromJson(Map<String, dynamic> json) =>
       _$DeeplinkRpcRequestFromJson(json);
 
   const DeeplinkRpcRequest._();
+
+  static const dataParameter = 'rpcQuery';
 }
