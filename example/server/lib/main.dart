@@ -69,8 +69,9 @@ class MyApp extends StatelessWidget {
           ),
         ],
         redirect: (context, state) async {
-          if (_deeplinkRpcServer.canHandle(state.uri)) {
-            await _deeplinkRpcServer.handle(state.uri);
+          final uriString = state.uri.toString();
+          if (_deeplinkRpcServer.canHandle(uriString)) {
+            await _deeplinkRpcServer.handle(uriString);
           }
           return null;
         },

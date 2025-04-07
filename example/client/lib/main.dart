@@ -65,7 +65,8 @@ class MyApp extends StatelessWidget {
           ),
         ],
         redirect: (context, state) async {
-          DeeplinkRpcClientSingleton.client.handleResponse(state.uri);
+          DeeplinkRpcClientSingleton.client
+              .handleResponse(state.uri.toString());
           return null;
         },
       ),

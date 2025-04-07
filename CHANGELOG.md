@@ -1,3 +1,7 @@
+# 2.0.0-beta.2
+- Update flutter version to 3.27.4
+- Update dependencies
+
 # 2.0.0-beta.1
 
 - Add automated tests

@@ -61,7 +61,9 @@ mixin _$DeeplinkRpcResult {
   }) =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeeplinkRpcResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DeeplinkRpcResultCopyWith<DeeplinkRpcResult> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -87,6 +89,8 @@ class _$DeeplinkRpcResultCopyWithImpl<$Res, $Val extends DeeplinkRpcResult>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DeeplinkRpcResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -100,6 +104,8 @@ class _$DeeplinkRpcResultCopyWithImpl<$Res, $Val extends DeeplinkRpcResult>
     ) as $Val);
   }
 
+  /// Create a copy of DeeplinkRpcResult
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DeeplinkRpcRequestCopyWith<$Res>? get request {
@@ -139,6 +145,8 @@ class __$$DeeplinkRpcResultFailureImplCopyWithImpl<$Res>
       $Res Function(_$DeeplinkRpcResultFailureImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DeeplinkRpcResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -157,6 +165,8 @@ class __$$DeeplinkRpcResultFailureImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of DeeplinkRpcResult
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DeeplinkRpcFailureCopyWith<$Res> get failure {
@@ -194,7 +204,9 @@ class _$DeeplinkRpcResultFailureImpl extends _DeeplinkRpcResultFailure {
   @override
   int get hashCode => Object.hash(runtimeType, request, failure);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeeplinkRpcResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeeplinkRpcResultFailureImplCopyWith<_$DeeplinkRpcResultFailureImpl>
@@ -279,8 +291,11 @@ abstract class _DeeplinkRpcResultFailure extends DeeplinkRpcResult {
   @override
   DeeplinkRpcRequest? get request;
   DeeplinkRpcFailure get failure;
+
+  /// Create a copy of DeeplinkRpcResult
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeeplinkRpcResultFailureImplCopyWith<_$DeeplinkRpcResultFailureImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -310,6 +325,8 @@ class __$$DeeplinkRpcResultSuccessImplCopyWithImpl<$Res>
       $Res Function(_$DeeplinkRpcResultSuccessImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DeeplinkRpcResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -328,6 +345,8 @@ class __$$DeeplinkRpcResultSuccessImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of DeeplinkRpcResult
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DeeplinkRpcRequestCopyWith<$Res> get request {
@@ -366,7 +385,9 @@ class _$DeeplinkRpcResultSuccessImpl extends _DeeplinkRpcResultSuccess {
   int get hashCode => Object.hash(
       runtimeType, request, const DeepCollectionEquality().hash(result));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeeplinkRpcResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeeplinkRpcResultSuccessImplCopyWith<_$DeeplinkRpcResultSuccessImpl>
@@ -450,8 +471,11 @@ abstract class _DeeplinkRpcResultSuccess extends DeeplinkRpcResult {
   @override
   DeeplinkRpcRequest get request;
   dynamic get result;
+
+  /// Create a copy of DeeplinkRpcResult
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeeplinkRpcResultSuccessImplCopyWith<_$DeeplinkRpcResultSuccessImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

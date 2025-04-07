@@ -25,8 +25,12 @@ mixin _$DeeplinkRpcRequest {
   String get replyUrl => throw _privateConstructorUsedError;
   Map<String, dynamic> get params => throw _privateConstructorUsedError;
 
+  /// Serializes this DeeplinkRpcRequest to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DeeplinkRpcRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DeeplinkRpcRequestCopyWith<DeeplinkRpcRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,6 +58,8 @@ class _$DeeplinkRpcRequestCopyWithImpl<$Res, $Val extends DeeplinkRpcRequest>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DeeplinkRpcRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -106,6 +112,8 @@ class __$$DeeplinkRpcRequestImplCopyWithImpl<$Res>
       $Res Function(_$DeeplinkRpcRequestImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DeeplinkRpcRequest
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -181,12 +189,14 @@ class _$DeeplinkRpcRequestImpl extends _DeeplinkRpcRequest {
             const DeepCollectionEquality().equals(other._params, _params));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, requestUrl, replyUrl,
       const DeepCollectionEquality().hash(_params));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeeplinkRpcRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeeplinkRpcRequestImplCopyWith<_$DeeplinkRpcRequestImpl> get copyWith =>
@@ -220,8 +230,11 @@ abstract class _DeeplinkRpcRequest extends DeeplinkRpcRequest {
   String get replyUrl;
   @override
   Map<String, dynamic> get params;
+
+  /// Create a copy of DeeplinkRpcRequest
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeeplinkRpcRequestImplCopyWith<_$DeeplinkRpcRequestImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
