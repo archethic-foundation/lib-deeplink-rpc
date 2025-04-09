@@ -18,7 +18,7 @@ method_payload :     | Json Message |-> | gzip |-> | base64Url |
                      +--------------+   +------+   +-----------+
 
 
-Deeplink Url : `<scheme>://<host>/<method_name>/<method_payload>`
+Deeplink Url : `<scheme>://<host>/<a_path>/<method_payload>`
 ```
 
 
@@ -30,7 +30,7 @@ method_payload :     | { "param1" : "a_value" } |----> | "H4sIAAAAAAAAA6tWUCpILE
                      +--------------------------+      +----------------------------------------------------------------+
 
 
-Deeplink Url : `scheme://host/a_method/H4sIAAAAAAAAA6tWUCpILErMNVRSsFJQSowvS8wpTVVSqAUAhIgKchgAAAA=`
+Deeplink Url : `scheme://host/a_path/H4sIAAAAAAAAA6tWUCpILErMNVRSsFJQSowvS8wpTVVSqAUAhIgKchgAAAA=`
 
 ```
 ### Request formatting

@@ -1,10 +1,31 @@
 /// SPDX-License-Identifier: AGPL-3.0-or-later
+import 'dart:async';
 import 'dart:developer' as dev;
 
 import 'package:deeplink_rpc/deeplink_rpc.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:json_rpc_2/json_rpc_2.dart';
 import 'package:logging/logging.dart';
+
+final deeplinkRpcServer = DeeplinRPCServerStreamChannel2();
+final peer = Peer(deeplinkRpcServer.cast<String>())
+  ..registerMethod(
+    'command_1',
+    (Parameters params) {
+      return {
+        'param1': 'value1',
+      };
+    },
+  )
+  ..registerMethod(
+    'command_2',
+    (Parameters params) {
+      return {
+        'param2': 'value2',
+      };
+    },
+  );
 
 void main() {
   Logger.root.onRecord.listen((event) {
@@ -19,6 +40,7 @@ void main() {
       zone: event.zone,
     );
   });
+  unawaited(peer.listen());
 
   runApp(const MyApp());
 }
@@ -30,18 +52,13 @@ final _logger = Logger('DeeplinkRPCServer');
 /// 2. Declare the deeplink-rpc receiver
 /// When a RPC call <scheme>://a_rpc_command/<payload> is received, the payload is decoded
 /// and transmitted to the `handle` method.
-final _deeplinkRpcServer = DeeplinkRpcServer()
-  ..registerHandler(
-    DeeplinkRpcRequestHandler(
-      route: const DeeplinkRpcRoute('/request_endpoint/'),
-      handle: (request) async {
-        _logger.info('Command received');
-        return {
-          'response_parameter': 'a response',
-        };
-      },
-    ),
-  );
+// final _deeplinkRpcServer = DeeplinkRpcServer(
+//   onReceive: (
+//     DeeplinkRpcRequest request,
+//     DeeplinkReplySend sendReply,
+//   ) {
+// },
+// );
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -69,10 +86,7 @@ class MyApp extends StatelessWidget {
           ),
         ],
         redirect: (context, state) async {
-          final uriString = state.uri.toString();
-          if (_deeplinkRpcServer.canHandle(uriString)) {
-            await _deeplinkRpcServer.handle(uriString);
-          }
+          unawaited(deeplinkRpcServer.server.receive(state.uri));
           return null;
         },
       ),
